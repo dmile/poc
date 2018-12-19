@@ -8,9 +8,20 @@ import MenuIcon from '@material-ui/icons/Menu';
 import Toolbar from "@material-ui/core/Toolbar/Toolbar";
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import Settings from '@material-ui/icons/Settings';
+import AddCircle from '@material-ui/icons/AddCircle';
 import Button from '@material-ui/core/Button';
 
 storiesOf(AppBar.name, module)
+
+    .add('simple', () => (
+        <AppBar>
+            <Toolbar>
+                <Typography variant="h6" color="inherit">
+                    Title
+                </Typography>
+            </Toolbar>
+        </AppBar>
+    ))
 
     .add('with buttons', () => (
         <AppBar>
@@ -23,6 +34,7 @@ storiesOf(AppBar.name, module)
                 </Typography>
                 <Button color="inherit">Button1</Button>
                 <Button color="inherit">Button2</Button>
+                <Button color="inherit">Button3</Button>
             </Toolbar>
         </AppBar>
     ))
@@ -41,6 +53,9 @@ storiesOf(AppBar.name, module)
                 </IconButton>
                 <IconButton color="inherit">
                     <Settings/>
+                </IconButton>
+                <IconButton color="inherit">
+                    <AddCircle/>
                 </IconButton>
             </Toolbar>
         </AppBar>
