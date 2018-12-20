@@ -2,14 +2,15 @@ import React from 'react';
 
 import {storiesOf} from '@storybook/react';
 import AppBar from "../../components/appbar/index";
+import ResponsiveAppBar from "../../components/appbar/responsive";
 import Typography from "@material-ui/core/Typography/Typography";
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import Toolbar from "@material-ui/core/Toolbar/Toolbar";
 import AccountCircle from '@material-ui/icons/AccountCircle';
 import Settings from '@material-ui/icons/Settings';
-import AddCircle from '@material-ui/icons/AddCircle';
 import Button from '@material-ui/core/Button';
+import MailIcon from '@material-ui/icons/Mail';
 
 storiesOf(AppBar.name, module)
 
@@ -49,14 +50,18 @@ storiesOf(AppBar.name, module)
                     Title
                 </Typography>
                 <IconButton color="inherit">
-                    <AccountCircle/>
+                    <MailIcon/>
                 </IconButton>
                 <IconButton color="inherit">
                     <Settings/>
                 </IconButton>
                 <IconButton color="inherit">
-                    <AddCircle/>
+                    <AccountCircle/>
                 </IconButton>
             </Toolbar>
         </AppBar>
+    ))
+
+    .add('with responsive icons', () => (
+        <ResponsiveAppBar/>
     ));
