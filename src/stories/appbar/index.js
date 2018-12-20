@@ -11,6 +11,15 @@ import AccountCircle from '@material-ui/icons/AccountCircle';
 import Settings from '@material-ui/icons/Settings';
 import Button from '@material-ui/core/Button';
 import MailIcon from '@material-ui/icons/Mail';
+import {createMuiTheme, MuiThemeProvider} from "@material-ui/core";
+
+const theme = createMuiTheme({
+    palette: {
+        primary: {
+            main: '#54301a'
+        }
+    }
+});
 
 storiesOf(AppBar.name, module)
 
@@ -62,6 +71,8 @@ storiesOf(AppBar.name, module)
         </AppBar>
     ))
 
-    .add('with responsive icons', () => (
-        <ResponsiveAppBar/>
+    .add('with responsive icons and color', () => (
+        <MuiThemeProvider theme={theme}>
+            <ResponsiveAppBar/>
+        </MuiThemeProvider>
     ));
