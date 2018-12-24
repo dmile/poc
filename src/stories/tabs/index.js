@@ -1,7 +1,7 @@
 import React from 'react';
 
 import {storiesOf} from '@storybook/react';
-import AppBar from "../../components/appbar/index";
+import Tabs from "../../components/tabs/index";
 import {createMuiTheme, MuiThemeProvider} from "@material-ui/core";
 
 const theme = createMuiTheme({
@@ -15,10 +15,10 @@ const theme = createMuiTheme({
     }
 });
 
-storiesOf('AppBar', module)
+storiesOf('Tabs', module)
 
-    .add('with responsive icons', () => (
+    .add('with scroll buttons', () => (
         <MuiThemeProvider theme={theme}>
-            <AppBar/>
+            <Tabs/>
         </MuiThemeProvider>
     ));
