@@ -49,6 +49,7 @@ class Toolbar extends React.Component {
         const {activeTab} = this.state;
         const {classes, width} = this.props;
         const isWidthUpSm = isWidthUp('sm', width);
+        const scrollButtons = isWidthUp('md', width) ? "on" : "off";
 
         return (
             <div className={classes.root}>
@@ -75,7 +76,7 @@ class Toolbar extends React.Component {
                     </MuiToolbar>
                     <MuiTabs
                         scrollable
-                        scrollButtons="on"
+                        scrollButtons={scrollButtons}
                         value={activeTab}
                         onChange={this.handleTabChange}
                     >
