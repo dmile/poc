@@ -33,7 +33,7 @@ const theme = createMuiTheme({
 
 storiesOf('Toolbar', module)
 
-    .add('draft', () => (
+    .add('catalog only', () => (
         <MuiThemeProvider theme={theme}>
             <Toolbar/>
         </MuiThemeProvider>
