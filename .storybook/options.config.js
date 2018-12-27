@@ -1,6 +1,9 @@
-import {setOptions} from '@storybook/addon-options';
+import {addDecorator} from '@storybook/react';
+import {withOptions} from '@storybook/addon-options';
 
-setOptions({
-    name: 'JPM Design System',
-    url: '#'
-});
+addDecorator(
+    withOptions({
+        name: 'JPM Design System',
+        url: '#'
+    })
+);
