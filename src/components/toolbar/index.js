@@ -4,6 +4,7 @@ import MuiAppBar from '@material-ui/core/AppBar';
 import MuiToolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
+import Divider from '@material-ui/core/Divider';
 import {withStyles} from '@material-ui/core/styles';
 import MenuIcon from '@material-ui/icons/Menu';
 import SearchIcon from '@material-ui/icons/Search';
@@ -74,6 +75,7 @@ class Toolbar extends React.Component {
                             <MoreIcon/>
                         </IconButton>
                     </MuiToolbar>
+                    <Divider variant="middle"/>
                     <MuiTabs
                         scrollable
                         scrollButtons={scrollButtons}
