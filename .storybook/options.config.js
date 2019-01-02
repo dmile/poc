@@ -3,7 +3,7 @@ import {withOptions} from '@storybook/addon-options';
 
 addDecorator(
     withOptions({
-        name: 'JPM Design System',
+        name: 'Design System',
         url: '#'
     })
 );
