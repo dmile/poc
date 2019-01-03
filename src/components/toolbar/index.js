@@ -19,6 +19,7 @@ import FormatListBulletedIcon from '@material-ui/icons/FormatListBulleted';
 import FormatIndentDecreaseIcon from '@material-ui/icons/FormatIndentDecrease';
 import FormatIndentIncreaseIcon from '@material-ui/icons/FormatIndentIncrease';
 import NotificationsIcon from "@material-ui/icons/Notifications";
+import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import SettingsIcon from '@material-ui/icons/Settings';
 import MoreIcon from '@material-ui/icons/MoreHoriz';
 import withWidth, {isWidthUp} from '@material-ui/core/withWidth';
@@ -122,6 +123,10 @@ class Toolbar extends React.Component {
                         label="Settings"
                         icon={<SettingsIcon/>}
                         onClick={() => console.log('settings action')}/>
+                    <HeaderAction
+                        label="Exit"
+                        icon={<ExitToAppIcon/>}
+                        onClick={() => console.log('exit action')}/>
                 </ToolbarHeader>
                 <Divider variant="middle"/>
                 <MuiTabs
