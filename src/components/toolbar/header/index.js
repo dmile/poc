@@ -66,19 +66,12 @@ class ToolbarHeader extends React.Component {
                             </IconButton>
                             <Menu
                                 anchorEl={this.state.anchorEl}
-                                anchorOrigin={{
-                                    vertical: 'top',
-                                    horizontal: 'right',
-                                }}
-                                transformOrigin={{
-                                    vertical: 'top',
-                                    horizontal: 'right',
-                                }}
                                 open={Boolean(this.state.anchorEl)}
+                                onClick={this.handleClose}
                                 onClose={this.handleClose}
                             >
                                 {
-                                    React.Children.map(menuChildren, child => renderMenuItem(child, this.handleClose))
+                                    React.Children.map(menuChildren, renderMenuItem)
                                 }
                             </Menu>
                         </div>
@@ -99,13 +92,10 @@ const renderActionButton = (action) => {
     )
 };
 
-const renderMenuItem = (action, handleClose) => {
+const renderMenuItem = (action) => {
     const {icon, label, onClick} = action.props;
     return (
-        <MenuItem color="inherit" onClick={(e) => {
-            handleClose();
-            onClick(e);
-        }}>
+        <MenuItem color="inherit" onClick={onClick}>
             <ListItemIcon>{icon}</ListItemIcon>
             <ListItemText inset primary={label}/>
         </MenuItem>
