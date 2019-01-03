@@ -3,12 +3,14 @@ import PropTypes from 'prop-types';
 import Toolbar from '@material-ui/core/Toolbar';
 import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
-import Hidden from '@material-ui/core/Hidden';
 import {withStyles} from '@material-ui/core/styles';
 import MenuIcon from '@material-ui/icons/Menu';
-import SearchIcon from '@material-ui/icons/Search';
 import MoreIcon from '@material-ui/icons/MoreVert';
-import NotificationsIcon from "@material-ui/icons/Notifications";
+import withWidth, {isWidthUp} from "@material-ui/core/withWidth";
+import MenuItem from '@material-ui/core/MenuItem';
+import Menu from '@material-ui/core/Menu';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
+import ListItemText from '@material-ui/core/ListItemText';
 
 const styles = (theme) => ({
     grow: {
@@ -20,38 +22,104 @@ const styles = (theme) => ({
 });
 
 class ToolbarHeader extends React.Component {
+    state = {
+        anchorEl: null
+    };
+
+    handleMenu = event => {
+        this.setState({anchorEl: event.currentTarget});
+    };
+
+    handleClose = () => {
+        this.setState({anchorEl: null});
+    };
 
     render() {
-        const {classes, title} = this.props;
+        const {classes, title, width, onMenuButtonClick, children} = this.props;
+        const isWidthUpSm = isWidthUp('sm', width);
+
+        const primaryChildren = React.Children.toArray(children)
+            .filter(child => child.props.primary);
+        const buttonsChildren = isWidthUpSm ? primaryChildren : [];
+
+        const otherChildren = React.Children.toArray(children)
+            .filter(child => !child.props.primary);
+        const menuChildren = isWidthUpSm ? otherChildren : primaryChildren.concat(otherChildren);
+
         return (
             <Toolbar>
-                <IconButton color="inherit" className={classes.menuButton}>
+                <IconButton color="inherit" className={classes.menuButton} onClick={onMenuButtonClick}>
                     <MenuIcon/>
                 </IconButton>
                 <Typography variant="h6" color="inherit" noWrap>
                     {title}
                 </Typography>
                 <div className={classes.grow}/>
-                <Hidden only={'xs'}>
-                    <IconButton color="inherit">
-                        <SearchIcon/>
-                    </IconButton>
-                    <IconButton color="inherit">
-                        <NotificationsIcon/>
-                    </IconButton>
-                </Hidden>
-                <IconButton color="inherit">
-                    <MoreIcon/>
-                </IconButton>
+                {
+                    React.Children.map(buttonsChildren, renderActionButton)
+                }
+                {
+                    menuChildren.length !== 0 && (
+                        <div>
+                            <IconButton color="inherit" onClick={this.handleMenu}>
+                                <MoreIcon/>
+                            </IconButton>
+                            <Menu
+                                anchorEl={this.state.anchorEl}
+                                anchorOrigin={{
+                                    vertical: 'top',
+                                    horizontal: 'right',
+                                }}
+                                transformOrigin={{
+                                    vertical: 'top',
+                                    horizontal: 'right',
+                                }}
+                                open={Boolean(this.state.anchorEl)}
+                                onClose={this.handleClose}
+                            >
+                                {
+                                    React.Children.map(menuChildren, child => renderMenuItem(child, this.handleClose))
+                                }
+                            </Menu>
+                        </div>
+                    )
+                }
+
             </Toolbar>
         );
     }
 }
 
-ToolbarHeader.propTypes = {
-    classes: PropTypes.object.isRequired,
-    title: PropTypes.string.isRequired
+const renderActionButton = (action) => {
+    const {icon, onClick} = action.props;
+    return (
+        <IconButton color="inherit" onClick={onClick}>
+            {icon}
+        </IconButton>
+    )
 };
 
-//TODO add more properties
-export default withStyles(styles, {name: 'MuiToolbar'})(ToolbarHeader);
+const renderMenuItem = (action, handleClose) => {
+    const {icon, label, onClick} = action.props;
+    return (
+        <MenuItem color="inherit" onClick={(e) => {
+            handleClose();
+            onClick(e);
+        }}>
+            <ListItemIcon>{icon}</ListItemIcon>
+            <ListItemText inset primary={label}/>
+        </MenuItem>
+    )
+};
+
+ToolbarHeader.propTypes = {
+    classes: PropTypes.object.isRequired,
+    title: PropTypes.string.isRequired,
+    onMenuButtonClick: PropTypes.func.isRequired,
+    children: PropTypes.oneOfType([
+        PropTypes.arrayOf(PropTypes.node),
+        PropTypes.node
+    ])
+};
+
+export default withWidth()(withStyles(styles)(ToolbarHeader));

@@ -18,6 +18,8 @@ import FormatListNumberedIcon from '@material-ui/icons/FormatListNumbered';
 import FormatListBulletedIcon from '@material-ui/icons/FormatListBulleted';
 import FormatIndentDecreaseIcon from '@material-ui/icons/FormatIndentDecrease';
 import FormatIndentIncreaseIcon from '@material-ui/icons/FormatIndentIncrease';
+import NotificationsIcon from "@material-ui/icons/Notifications";
+import SettingsIcon from '@material-ui/icons/Settings';
 import MoreIcon from '@material-ui/icons/MoreHoriz';
 import withWidth, {isWidthUp} from '@material-ui/core/withWidth';
 import {fade} from '@material-ui/core/styles/colorManipulator';
@@ -25,6 +27,7 @@ import {fade} from '@material-ui/core/styles/colorManipulator';
 import CustomTabs from '../customtabs'
 import ToolbarButton from '../toolbar/button'
 import ToolbarHeader from './header'
+import HeaderAction from './header/action'
 import Hidden from "@material-ui/core/Hidden/Hidden";
 
 const styles = theme => ({
@@ -104,7 +107,22 @@ class Toolbar extends React.Component {
 
         return (
             <MuiAppBar position="static">
-                <ToolbarHeader title="Page Title"/>
+                <ToolbarHeader title="Page Title" onMenuButtonClick={() => console.log('menu button clicked')}>
+                    <HeaderAction
+                        primary
+                        label="Search"
+                        icon={<SearchIcon/>}
+                        onClick={() => console.log('search action')}/>
+                    <HeaderAction
+                        primary
+                        label="Notifications"
+                        icon={<NotificationsIcon/>}
+                        onClick={() => console.log('notification action')}/>
+                    <HeaderAction
+                        label="Settings"
+                        icon={<SettingsIcon/>}
+                        onClick={() => console.log('settings action')}/>
+                </ToolbarHeader>
                 <Divider variant="middle"/>
                 <MuiTabs
                     scrollable={true}
@@ -124,56 +142,56 @@ class Toolbar extends React.Component {
                 </MuiTabs>
                 <Divider variant="middle"/>
                 {activeTab === 0 &&
-                    <CustomTabs
-                        scrollable={true}
-                        scrollButtons="auto"
-                        value={activeTab}
-                        onChange={this.handleTabChange}
-                    >
-                        <MuiToolbar disableGutters={true}>
-                            <ToolbarButton icon={<FormatListNumberedIcon/>} expandable={true}/>
-                            <Hidden xsDown>
-                                <ToolbarButton icon={<FormatListBulletedIcon/>} expandable={true}/>
-                            </Hidden>
-                            <Hidden smDown>
-                                <ToolbarButton icon={<FormatIndentDecreaseIcon/>}/>
-                                <ToolbarButton icon={<FormatIndentIncreaseIcon/>}/>
-                                <ToolbarButton icon={<FormatAlignLeftIcon/>}/>
-                            </Hidden>
-                            <ToolbarButton icon={<FormatAlignCenterIcon/>}/>
-                            <ToolbarButton icon={<FormatAlignRightIcon/>}/>
-                            <Hidden xsDown>
-                                <ToolbarButton icon={<FormatAlignJustifyIcon/>}/>
-                            </Hidden>
-                            <ToolbarButton icon={<MoreIcon/>}/>
-                        </MuiToolbar>
-                        <div className={classes.divider}/>
-                        <MuiToolbar disableGutters={true}>
-                            <Hidden smDown>
-                                <ToolbarButton
-                                    icon={<FormatColorIcon className={classes.leftIcon}/>} label="Styles"
-                                    expandable={true}/>
-                            </Hidden>
-                            <Hidden mdUp>
-                                <ToolbarButton
-                                    icon={<FormatColorIcon/>}
-                                    expandable={true}/>
-                            </Hidden>
-                        </MuiToolbar>
-                        <div className={classes.divider}/>
-                        <MuiToolbar disableGutters={true}>
-                            <Hidden smDown>
-                                <ToolbarButton
-                                    icon={<SearchIcon className={classes.leftIcon}/>} label="Find"
-                                    expandable={true}/>
-                            </Hidden>
-                            <Hidden mdUp>
-                                <ToolbarButton
-                                    icon={<SearchIcon/>}
-                                    expandable={true}/>
-                            </Hidden>
-                        </MuiToolbar>
-                    </CustomTabs>
+                <CustomTabs
+                    scrollable={true}
+                    scrollButtons="auto"
+                    value={activeTab}
+                    onChange={this.handleTabChange}
+                >
+                    <MuiToolbar disableGutters={true}>
+                        <ToolbarButton icon={<FormatListNumberedIcon/>} expandable={true}/>
+                        <Hidden xsDown>
+                            <ToolbarButton icon={<FormatListBulletedIcon/>} expandable={true}/>
+                        </Hidden>
+                        <Hidden smDown>
+                            <ToolbarButton icon={<FormatIndentDecreaseIcon/>}/>
+                            <ToolbarButton icon={<FormatIndentIncreaseIcon/>}/>
+                            <ToolbarButton icon={<FormatAlignLeftIcon/>}/>
+                        </Hidden>
+                        <ToolbarButton icon={<FormatAlignCenterIcon/>}/>
+                        <ToolbarButton icon={<FormatAlignRightIcon/>}/>
+                        <Hidden xsDown>
+                            <ToolbarButton icon={<FormatAlignJustifyIcon/>}/>
+                        </Hidden>
+                        <ToolbarButton icon={<MoreIcon/>}/>
+                    </MuiToolbar>
+                    <div className={classes.divider}/>
+                    <MuiToolbar disableGutters={true}>
+                        <Hidden smDown>
+                            <ToolbarButton
+                                icon={<FormatColorIcon className={classes.leftIcon}/>} label="Styles"
+                                expandable={true}/>
+                        </Hidden>
+                        <Hidden mdUp>
+                            <ToolbarButton
+                                icon={<FormatColorIcon/>}
+                                expandable={true}/>
+                        </Hidden>
+                    </MuiToolbar>
+                    <div className={classes.divider}/>
+                    <MuiToolbar disableGutters={true}>
+                        <Hidden smDown>
+                            <ToolbarButton
+                                icon={<SearchIcon className={classes.leftIcon}/>} label="Find"
+                                expandable={true}/>
+                        </Hidden>
+                        <Hidden mdUp>
+                            <ToolbarButton
+                                icon={<SearchIcon/>}
+                                expandable={true}/>
+                        </Hidden>
+                    </MuiToolbar>
+                </CustomTabs>
                 }
             </MuiAppBar>
         );
