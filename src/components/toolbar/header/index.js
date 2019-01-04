@@ -84,9 +84,9 @@ class ToolbarHeader extends React.Component {
 }
 
 const renderActionButton = (action) => {
-    const {icon, onClick} = action.props;
+    const {icon, label, onClick} = action.props;
     return (
-        <IconButton color="inherit" onClick={onClick}>
+        <IconButton title={label} color="inherit" onClick={onClick}>
             {icon}
         </IconButton>
     )
