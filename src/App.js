@@ -16,6 +16,9 @@ const theme = createMuiTheme({
         secondary: {
             main: '#e6e6e6'
         }
+    },
+    typography: {
+        useNextVariants: true
     }
     // breakpoints: {
     //     values: {

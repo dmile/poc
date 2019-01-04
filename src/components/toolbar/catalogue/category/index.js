@@ -19,7 +19,11 @@ class Category extends React.Component {
 }
 
 Category.propTypes = {
-    classes: PropTypes.object.isRequired
+    classes: PropTypes.object.isRequired,
+    children: PropTypes.oneOfType([
+        PropTypes.arrayOf(PropTypes.node),
+        PropTypes.node
+    ]).isRequired
 };
 
 export default withStyles(styles, {name: 'MuiToolbar'})(Category);
