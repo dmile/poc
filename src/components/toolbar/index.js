@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import MuiAppBar from '@material-ui/core/AppBar';
-import MuiToolbar from '@material-ui/core/Toolbar';
 import withStyles from '@material-ui/core/styles/withStyles';
 import MuiTab from "@material-ui/core/Tab/Tab";
 import MuiTabs from "@material-ui/core/Tabs/Tabs";
@@ -23,72 +22,17 @@ import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import SettingsIcon from '@material-ui/icons/Settings';
 import MoreIcon from '@material-ui/icons/MoreHoriz';
 import withWidth, {isWidthUp} from '@material-ui/core/withWidth';
-import {fade} from '@material-ui/core/styles/colorManipulator';
-
-import CustomTabs from '../customtabs'
 import ToolbarButton from '../toolbar/button'
 import ToolbarHeader from './header'
 import HeaderAction from './header/action'
+import Category from './catalogue/category'
+import Catalogue from './catalogue'
 import Hidden from "@material-ui/core/Hidden/Hidden";
 
 const styles = theme => ({
-    divider: {
-        minWidth: '1px',
-        display: 'flex',
-        position: 'relative',
-        backgroundColor: theme.palette.divider,
-        marginTop: theme.spacing.unit * 2,
-        marginRight: theme.spacing.unit,
-        marginBottom: theme.spacing.unit * 2,
-        marginLeft: theme.spacing.unit
-    },
-    tabRoot: {
-        textTransform: 'initial'
-    },
     leftIcon: {
         marginRight: theme.spacing.unit,
-    },
-    menuButton: {
-        minHeight: theme.spacing.unit,
-    },
-    search: {
-        position: 'relative',
-        borderRadius: theme.shape.borderRadius,
-        backgroundColor: fade(theme.palette.common.white, 0.15),
-        '&:hover': {
-            backgroundColor: fade(theme.palette.common.white, 0.25),
-        },
-        marginRight: theme.spacing.unit * 2,
-        marginLeft: 0,
-        width: '100%',
-        [theme.breakpoints.up('sm')]: {
-            width: 'auto',
-        },
-    },
-    searchIcon: {
-        width: theme.spacing.unit * 9,
-        height: '100%',
-        position: 'absolute',
-        pointerEvents: 'none',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-    },
-    inputRoot: {
-        color: 'inherit',
-        width: '100%',
-    },
-    inputInput: {
-        paddingTop: theme.spacing.unit,
-        paddingRight: theme.spacing.unit,
-        paddingBottom: theme.spacing.unit,
-        paddingLeft: theme.spacing.unit * 10,
-        transition: theme.transitions.create('width'),
-        width: '100%',
-        [theme.breakpoints.up('md')]: {
-            width: 200,
-        },
-    },
+    }
 });
 
 class Toolbar extends React.Component {
@@ -130,7 +74,7 @@ class Toolbar extends React.Component {
                 </ToolbarHeader>
                 <Divider variant="middle"/>
                 <MuiTabs
-                    scrollable={true}
+                    scrollable
                     scrollButtons="auto"
                     value={activeTab}
                     onChange={this.handleTabChange}
@@ -147,13 +91,8 @@ class Toolbar extends React.Component {
                 </MuiTabs>
                 <Divider variant="middle"/>
                 {activeTab === 0 &&
-                <CustomTabs
-                    scrollable={true}
-                    scrollButtons="auto"
-                    value={activeTab}
-                    onChange={this.handleTabChange}
-                >
-                    <MuiToolbar disableGutters={true}>
+                <Catalogue>
+                    <Category>
                         <ToolbarButton icon={<FormatListNumberedIcon/>} expandable={true}/>
                         <Hidden xsDown>
                             <ToolbarButton icon={<FormatListBulletedIcon/>} expandable={true}/>
@@ -169,9 +108,8 @@ class Toolbar extends React.Component {
                             <ToolbarButton icon={<FormatAlignJustifyIcon/>}/>
                         </Hidden>
                         <ToolbarButton icon={<MoreIcon/>}/>
-                    </MuiToolbar>
-                    <div className={classes.divider}/>
-                    <MuiToolbar disableGutters={true}>
+                    </Category>
+                    <Category>
                         <Hidden smDown>
                             <ToolbarButton
                                 icon={<FormatColorIcon className={classes.leftIcon}/>} label="Styles"
@@ -182,9 +120,8 @@ class Toolbar extends React.Component {
                                 icon={<FormatColorIcon/>}
                                 expandable={true}/>
                         </Hidden>
-                    </MuiToolbar>
-                    <div className={classes.divider}/>
-                    <MuiToolbar disableGutters={true}>
+                    </Category>
+                    <Category>
                         <Hidden smDown>
                             <ToolbarButton
                                 icon={<SearchIcon className={classes.leftIcon}/>} label="Find"
@@ -195,8 +132,8 @@ class Toolbar extends React.Component {
                                 icon={<SearchIcon/>}
                                 expandable={true}/>
                         </Hidden>
-                    </MuiToolbar>
-                </CustomTabs>
+                    </Category>
+                </Catalogue>
                 }
             </MuiAppBar>
         );
