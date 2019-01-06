@@ -15,5 +15,4 @@ const App = () => (
     </React.Fragment>
 );
 
-//TODO remove unused dependencies
 export default App;
