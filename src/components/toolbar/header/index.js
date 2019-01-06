@@ -66,6 +66,8 @@ class ToolbarHeader extends React.Component {
                             </IconButton>
                             <Menu
                                 anchorEl={this.state.anchorEl}
+                                getContentAnchorEl={null}
+                                anchorOrigin={{vertical: "bottom", horizontal: "left"}}
                                 open={Boolean(this.state.anchorEl)}
                                 onClick={this.handleClose}
                                 onClose={this.handleClose}
