@@ -5,12 +5,9 @@ import IconButton from '@material-ui/core/IconButton';
 import Typography from '@material-ui/core/Typography';
 import {withStyles} from '@material-ui/core/styles';
 import MenuIcon from '@material-ui/icons/Menu';
-import MoreIcon from '@material-ui/icons/MoreVert';
+import MoreVertIcon from '@material-ui/icons/MoreVert';
 import withWidth, {isWidthUp} from "@material-ui/core/withWidth";
-import MenuItem from '@material-ui/core/MenuItem';
 import Menu from '@material-ui/core/Menu';
-import ListItemIcon from '@material-ui/core/ListItemIcon';
-import ListItemText from '@material-ui/core/ListItemText';
 
 const styles = (theme) => ({
     grow: {
@@ -56,13 +53,13 @@ class ToolbarHeader extends React.Component {
                 </Typography>
                 <div className={classes.grow}/>
                 {
-                    React.Children.map(buttonsChildren, renderActionButton)
+                    buttonsChildren
                 }
                 {
-                    menuChildren.length !== 0 && (
+                    menuChildren.length > 0 && (
                         <div>
                             <IconButton color="inherit" onClick={this.handleMenu}>
-                                <MoreIcon/>
+                                <MoreVertIcon/>
                             </IconButton>
                             <Menu
                                 anchorEl={this.state.anchorEl}
@@ -73,36 +70,17 @@ class ToolbarHeader extends React.Component {
                                 onClose={this.handleClose}
                             >
                                 {
-                                    React.Children.map(menuChildren, renderMenuItem)
+                                    React.Children.map(menuChildren, child =>
+                                        React.cloneElement(child, {asMenuItem: true}))
                                 }
                             </Menu>
                         </div>
                     )
                 }
-
             </Toolbar>
         );
     }
 }
-
-const renderActionButton = (action) => {
-    const {icon, label, onClick} = action.props;
-    return (
-        <IconButton title={label} color="inherit" onClick={onClick}>
-            {icon}
-        </IconButton>
-    )
-};
-
-const renderMenuItem = (action) => {
-    const {icon, label, onClick} = action.props;
-    return (
-        <MenuItem color="inherit" onClick={onClick}>
-            <ListItemIcon>{icon}</ListItemIcon>
-            <ListItemText inset primary={label}/>
-        </MenuItem>
-    )
-};
 
 ToolbarHeader.propTypes = {
     classes: PropTypes.object.isRequired,
@@ -114,4 +92,5 @@ ToolbarHeader.propTypes = {
     ])
 };
 
+//TODO add properties
 export default withWidth()(withStyles(styles)(ToolbarHeader));
