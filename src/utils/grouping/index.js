@@ -1,3 +1,14 @@
+/**
+ * Group items inside categories per limited number of columns
+ *
+ * @param colsNeededArr - array of items numbers per each category
+ *
+ *  [[item, item, item], [item], [item, item]] ===> [3, 1, 2]
+ *
+ * @param colsTotal - total number of columns
+ *
+ * @returns array of column numbers available per each category
+ */
 const group = (colsNeededArr, colsTotal) => {
     if (colsNeededArr.length > colsTotal) {
         return colsNeededArr.map((colsNeeded, idx) => ((idx + 1) <= colsTotal) ? 1 : 0);
@@ -23,5 +34,4 @@ const group = (colsNeededArr, colsTotal) => {
     }
 };
 
-//TODO add tests
 export default group;
