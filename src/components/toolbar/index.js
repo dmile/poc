@@ -35,6 +35,12 @@ import CloudDownloadIcon from '@material-ui/icons/CloudDownload';
 import NotificationsIcon from "@material-ui/icons/Notifications";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import SettingsIcon from '@material-ui/icons/Settings';
+import SkipPreviousIcon from '@material-ui/icons/SkipPrevious';
+import PlayArrowIcon from '@material-ui/icons/PlayArrow';
+import PauseIcon from '@material-ui/icons/Pause';
+import StopIcon from '@material-ui/icons/Stop';
+import SkipNextIcon from '@material-ui/icons/SkipNext';
+import MusicNote from '@material-ui/icons/MusicNote';
 import ToolbarHeader from './header'
 import Category from './catalogue/category'
 import Catalogue from './catalogue'
@@ -71,7 +77,7 @@ class Toolbar extends React.Component {
 
         return (
             <MuiAppBar position="static">
-                <ToolbarHeader title="Page Title" onMenuButtonClick={console.log}>
+                <ToolbarHeader title="Page Title" onMenuButtonClick={console.log} width={width}>
                     <MenuItemWrapper
                         primary
                         label="Search"
@@ -120,7 +126,7 @@ class Toolbar extends React.Component {
                     <MuiTab label="Catnine" icon={isWidthUpSm && <BarChartRoundedIcon/>}/>
                 </MuiTabs>
                 {activeTab === 0 &&
-                <Catalogue>
+                (<Catalogue width={width}>
                     <Category label="List format" icon={<Filter1Icon/>}>
                         <MenuItemWrapper label="List numbered" icon={<FormatListNumberedIcon/>}
                                          onClick={console.log}>
@@ -215,7 +221,33 @@ class Toolbar extends React.Component {
                             {renderToolbarButtonOrMenuItem}
                         </MenuItemWrapper>
                     </Category>
-                </Catalogue>
+                </Catalogue>)
+                }
+                {activeTab === 1 && (
+                    <Catalogue width={width}>
+                        <Category label="Player" icon={<MusicNote/>}>
+                            <MenuItemWrapper label="Desktop" icon={<SkipPreviousIcon/>}
+                                             onClick={console.log}>
+                                {renderToolbarButtonOrMenuItem}
+                            </MenuItemWrapper>
+                            <MenuItemWrapper label="Laptop" icon={<PlayArrowIcon/>}
+                                             onClick={console.log}>
+                                {renderToolbarButtonOrMenuItem}
+                            </MenuItemWrapper>
+                            <MenuItemWrapper label="Tablet" icon={<PauseIcon/>}
+                                             onClick={console.log}>
+                                {renderToolbarButtonOrMenuItem}
+                            </MenuItemWrapper>
+                            <MenuItemWrapper label="Phone" icon={<StopIcon/>}
+                                             onClick={console.log}>
+                                {renderToolbarButtonOrMenuItem}
+                            </MenuItemWrapper>
+                            <MenuItemWrapper label="Phone" icon={<SkipNextIcon/>}
+                                             onClick={console.log}>
+                                {renderToolbarButtonOrMenuItem}
+                            </MenuItemWrapper>
+                        </Category>
+                    </Catalogue>)
                 }
             </MuiAppBar>
         );
@@ -250,7 +282,7 @@ const menuItem = ({icon, label, onClick, ...otherProps}) => (
 );
 
 Toolbar.propTypes = {
-    classes: PropTypes.object.isRequired,
+    classes: PropTypes.object.isRequired
 };
 
 //TODO create ToolbarContent and Button, hide tabs, extract init data to App

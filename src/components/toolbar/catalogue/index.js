@@ -4,7 +4,6 @@ import {lighten} from "@material-ui/core/styles/colorManipulator";
 import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
 import Menu from "@material-ui/core/Menu/Menu";
 import {withStyles} from '@material-ui/core/styles';
-import withWidth from "@material-ui/core/withWidth";
 import PropTypes from 'prop-types';
 import Button from "@material-ui/core/Button";
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
@@ -91,7 +90,6 @@ class Catalogue extends React.Component {
         } else {
             colsTotal = 5;
         }
-        console.log(width + ' (' + colsTotal + ')');
 
         return (
             <div className={classes.root}>
@@ -249,8 +247,9 @@ const renderCategoryMenu = (category, isExpanded, handleExpanded, classes) => {
 };
 
 Catalogue.propTypes = {
-    classes: PropTypes.object.isRequired
+    classes: PropTypes.object.isRequired,
+    width: PropTypes.oneOf(['xs', 'sm', 'md', 'lg', 'xl'])
 };
 
 //TODO add props, simplify renderCategory
-export default withWidth()(withStyles(styles, {name: 'MuiTabs'})(Catalogue));
+export default withStyles(styles, {name: 'MuiTabs'})(Catalogue);

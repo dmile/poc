@@ -6,7 +6,7 @@ import Typography from '@material-ui/core/Typography';
 import {withStyles} from '@material-ui/core/styles';
 import MenuIcon from '@material-ui/icons/Menu';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
-import withWidth, {isWidthUp} from "@material-ui/core/withWidth";
+import {isWidthUp} from "@material-ui/core/withWidth";
 import Menu from '@material-ui/core/Menu';
 
 const styles = (theme) => ({
@@ -84,6 +84,7 @@ class ToolbarHeader extends React.Component {
 ToolbarHeader.propTypes = {
     classes: PropTypes.object.isRequired,
     title: PropTypes.string.isRequired,
+    width: PropTypes.oneOf(['xs', 'sm', 'md', 'lg', 'xl']),
     onMenuButtonClick: PropTypes.func.isRequired,
     children: PropTypes.oneOfType([
         PropTypes.arrayOf(PropTypes.node),
@@ -92,4 +93,4 @@ ToolbarHeader.propTypes = {
 };
 
 //TODO add properties
-export default withWidth()(withStyles(styles)(ToolbarHeader));
+export default withStyles(styles)(ToolbarHeader);
