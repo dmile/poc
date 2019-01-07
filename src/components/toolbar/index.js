@@ -10,10 +10,28 @@ import FormatAlignCenterIcon from '@material-ui/icons/FormatAlignCenter';
 import FormatAlignRightIcon from '@material-ui/icons/FormatAlignRight';
 import FormatAlignJustifyIcon from '@material-ui/icons/FormatAlignJustify';
 import FormatListNumberedIcon from '@material-ui/icons/FormatListNumbered';
+import FormatListNumberedRtlIcon from '@material-ui/icons/FormatListNumberedRtl';
 import FormatListBulletedIcon from '@material-ui/icons/FormatListBulleted';
 import FormatIndentDecreaseIcon from '@material-ui/icons/FormatIndentDecrease';
 import FormatIndentIncreaseIcon from '@material-ui/icons/FormatIndentIncrease';
-import StarIcon from '@material-ui/icons/Star';
+import Filter1Icon from '@material-ui/icons/Filter1';
+import Filter2Icon from '@material-ui/icons/Filter2';
+import Filter3Icon from '@material-ui/icons/Filter3';
+import Filter4Icon from '@material-ui/icons/Filter4';
+import Filter5Icon from '@material-ui/icons/Filter5';
+import Filter6Icon from '@material-ui/icons/Filter6';
+import Filter7Icon from '@material-ui/icons/Filter7';
+import AlternateEmailIcon from '@material-ui/icons/AlternateEmail';
+import TextRotationNoneIcon from '@material-ui/icons/TextRotationNone';
+import TextRotateVerticalIcon from '@material-ui/icons/TextRotateVertical';
+import TextRotateUpIcon from '@material-ui/icons/TextRotateUp';
+import TextRotationDownIcon from '@material-ui/icons/TextRotationDown';
+import FormatBoldIcon from '@material-ui/icons/FormatBold';
+import FormatItalicIcon from '@material-ui/icons/FormatItalic';
+import FormatUnderlinedIcon from '@material-ui/icons/FormatUnderlined';
+import CloudIcon from '@material-ui/icons/Cloud';
+import CloudUploadIcon from '@material-ui/icons/CloudUpload';
+import CloudDownloadIcon from '@material-ui/icons/CloudDownload';
 import NotificationsIcon from "@material-ui/icons/Notifications";
 import ExitToAppIcon from "@material-ui/icons/ExitToApp";
 import SettingsIcon from '@material-ui/icons/Settings';
@@ -53,12 +71,12 @@ class Toolbar extends React.Component {
 
         return (
             <MuiAppBar position="static">
-                <ToolbarHeader title="Page Title" onMenuButtonClick={() => console.log('menu button clicked')}>
+                <ToolbarHeader title="Page Title" onMenuButtonClick={console.log}>
                     <MenuItemWrapper
                         primary
                         label="Search"
                         icon={<SearchIcon/>}
-                        onClick={() => console.log('search action')}
+                        onClick={console.log}
                     >
                         {renderActionButtonOrMenuItem}
                     </MenuItemWrapper>
@@ -66,21 +84,21 @@ class Toolbar extends React.Component {
                         primary
                         label="Notifications"
                         icon={<NotificationsIcon/>}
-                        onClick={() => console.log('notification action')}
+                        onClick={console.log}
                     >
                         {renderActionButtonOrMenuItem}
                     </MenuItemWrapper>
                     <MenuItemWrapper
                         label="Settings"
                         icon={<SettingsIcon/>}
-                        onClick={() => console.log('settings action')}
+                        onClick={console.log}
                     >
                         {renderActionButtonOrMenuItem}
                     </MenuItemWrapper>
                     <MenuItemWrapper
                         label="Exit"
                         icon={<ExitToAppIcon/>}
-                        onClick={() => console.log('exit action')}
+                        onClick={console.log}
                     >
                         {renderActionButtonOrMenuItem}
                     </MenuItemWrapper>
@@ -103,82 +121,96 @@ class Toolbar extends React.Component {
                 </MuiTabs>
                 {activeTab === 0 &&
                 <Catalogue>
-                    <Category name="category 1" icon={<StarIcon/>}>
-                        <MenuItemWrapper label="FormatListNumbered" icon={<FormatListNumberedIcon/>}
+                    <Category label="List format" icon={<Filter1Icon/>}>
+                        <MenuItemWrapper label="List numbered" icon={<FormatListNumberedIcon/>}
                                          onClick={console.log}>
                             {renderToolbarButtonOrMenuItem}
                         </MenuItemWrapper>
-                        <MenuItemWrapper label="FormatListBulleted" icon={<FormatListBulletedIcon/>}
+                        <MenuItemWrapper label="List bulleted" icon={<FormatListBulletedIcon/>}
                                          onClick={console.log}>
                             {renderToolbarButtonOrMenuItem}
                         </MenuItemWrapper>
-                        <MenuItemWrapper label="FormatIndentDecrease" icon={<FormatIndentDecreaseIcon/>}
-                                         onClick={console.log}>
-                            {renderToolbarButtonOrMenuItem}
-                        </MenuItemWrapper>
-                        <MenuItemWrapper label="FormatIndentIncrease" icon={<FormatIndentIncreaseIcon/>}
-                                         onClick={console.log}>
-                            {renderToolbarButtonOrMenuItem}
-                        </MenuItemWrapper>
-                        <MenuItemWrapper label="FormatAlignLeft" icon={<FormatAlignLeftIcon/>}
-                                         onClick={console.log}>
-                            {renderToolbarButtonOrMenuItem}
-                        </MenuItemWrapper>
-                        <MenuItemWrapper label="FormatAlignCenter" icon={<FormatAlignCenterIcon/>}
-                                         onClick={console.log}>
-                            {renderToolbarButtonOrMenuItem}
-                        </MenuItemWrapper>
-                        <MenuItemWrapper label="FormatAlignRight" icon={<FormatAlignRightIcon/>}
-                                         onClick={console.log}>
-                            {renderToolbarButtonOrMenuItem}
-                        </MenuItemWrapper>
-                        <MenuItemWrapper label="FormatAlignJustify" icon={<FormatAlignJustifyIcon/>}
+                        <MenuItemWrapper label="List numbered rtl" icon={<FormatListNumberedRtlIcon/>}
                                          onClick={console.log}>
                             {renderToolbarButtonOrMenuItem}
                         </MenuItemWrapper>
                     </Category>
-                    <Category name="category 2" icon={<StarIcon/>}>
-                        <MenuItemWrapper label="FormatListNumbered" icon={<FormatListNumberedIcon/>}
+                    <Category label="Font" icon={<Filter2Icon/>}>
+                        <MenuItemWrapper label="Format bold" icon={<FormatBoldIcon/>}
                                          onClick={console.log}>
                             {renderToolbarButtonOrMenuItem}
                         </MenuItemWrapper>
-                        <MenuItemWrapper label="FormatListBulleted" icon={<FormatListBulletedIcon/>}
+                        <MenuItemWrapper label="Format italic" icon={<FormatItalicIcon/>}
                                          onClick={console.log}>
                             {renderToolbarButtonOrMenuItem}
                         </MenuItemWrapper>
-                    </Category>
-                    <Category name="category 3" icon={<StarIcon/>}>
-                        <MenuItemWrapper label="FormatListNumbered" icon={<FormatListNumberedIcon/>}
-                                         onClick={console.log}>
-                            {renderToolbarButtonOrMenuItem}
-                        </MenuItemWrapper>
-                        <MenuItemWrapper label="FormatListBulleted" icon={<FormatListBulletedIcon/>}
-                                         onClick={console.log}>
-                            {renderToolbarButtonOrMenuItem}
-                        </MenuItemWrapper>
-                        <MenuItemWrapper label="FormatListNumbered" icon={<FormatListNumberedIcon/>}
-                                         onClick={console.log}>
-                            {renderToolbarButtonOrMenuItem}
-                        </MenuItemWrapper>
-                        <MenuItemWrapper label="FormatListBulleted" icon={<FormatListBulletedIcon/>}
+                        <MenuItemWrapper label="Format underlined" icon={<FormatUnderlinedIcon/>}
                                          onClick={console.log}>
                             {renderToolbarButtonOrMenuItem}
                         </MenuItemWrapper>
                     </Category>
-                    <Category name="category 4" icon={<StarIcon/>}>
-                        <MenuItemWrapper label="FormatListNumbered" icon={<FormatListNumberedIcon/>}
+                    <Category label="Indent" icon={<Filter3Icon/>}>
+                        <MenuItemWrapper label="Indent decrease" icon={<FormatIndentDecreaseIcon/>}
+                                         onClick={console.log}>
+                            {renderToolbarButtonOrMenuItem}
+                        </MenuItemWrapper>
+                        <MenuItemWrapper label="Indent increase" icon={<FormatIndentIncreaseIcon/>}
                                          onClick={console.log}>
                             {renderToolbarButtonOrMenuItem}
                         </MenuItemWrapper>
                     </Category>
-                    <Category name="category 5" icon={<StarIcon/>}>
-                        <MenuItemWrapper label="FormatListNumbered" icon={<FormatListNumberedIcon/>}
+                    <Category label="Emails" icon={<Filter4Icon/>}>
+                        <MenuItemWrapper label="Just waves" icon={<AlternateEmailIcon/>}
                                          onClick={console.log}>
                             {renderToolbarButtonOrMenuItem}
                         </MenuItemWrapper>
                     </Category>
-                    <Category name="category 6" icon={<StarIcon/>}>
-                        <MenuItemWrapper label="FormatListNumbered" icon={<FormatListNumberedIcon/>}
+                    <Category label="Cloud" icon={<Filter5Icon/>}>
+                        <MenuItemWrapper label="Logo" icon={<CloudIcon/>}
+                                         onClick={console.log}>
+                            {renderToolbarButtonOrMenuItem}
+                        </MenuItemWrapper>
+                        <MenuItemWrapper label="Upload" icon={<CloudUploadIcon/>}
+                                         onClick={console.log}>
+                            {renderToolbarButtonOrMenuItem}
+                        </MenuItemWrapper>
+                        <MenuItemWrapper label="Download" icon={<CloudDownloadIcon/>}
+                                         onClick={console.log}>
+                            {renderToolbarButtonOrMenuItem}
+                        </MenuItemWrapper>
+                    </Category>
+                    <Category label="Text alignment" icon={<Filter6Icon/>}>
+                        <MenuItemWrapper label="Align left" icon={<FormatAlignLeftIcon/>}
+                                         onClick={console.log}>
+                            {renderToolbarButtonOrMenuItem}
+                        </MenuItemWrapper>
+                        <MenuItemWrapper label="Align center" icon={<FormatAlignCenterIcon/>}
+                                         onClick={console.log}>
+                            {renderToolbarButtonOrMenuItem}
+                        </MenuItemWrapper>
+                        <MenuItemWrapper label="Align right" icon={<FormatAlignRightIcon/>}
+                                         onClick={console.log}>
+                            {renderToolbarButtonOrMenuItem}
+                        </MenuItemWrapper>
+                        <MenuItemWrapper label="Align justify" icon={<FormatAlignJustifyIcon/>}
+                                         onClick={console.log}>
+                            {renderToolbarButtonOrMenuItem}
+                        </MenuItemWrapper>
+                    </Category>
+                    <Category label="Text rotation" icon={<Filter7Icon/>}>
+                        <MenuItemWrapper label="Rotation none" icon={<TextRotationNoneIcon/>}
+                                         onClick={console.log}>
+                            {renderToolbarButtonOrMenuItem}
+                        </MenuItemWrapper>
+                        <MenuItemWrapper label="Rotate vertical" icon={<TextRotateVerticalIcon/>}
+                                         onClick={console.log}>
+                            {renderToolbarButtonOrMenuItem}
+                        </MenuItemWrapper>
+                        <MenuItemWrapper label="Rotate up" icon={<TextRotateUpIcon/>}
+                                         onClick={console.log}>
+                            {renderToolbarButtonOrMenuItem}
+                        </MenuItemWrapper>
+                        <MenuItemWrapper label="Rotation down" icon={<TextRotationDownIcon/>}
                                          onClick={console.log}>
                             {renderToolbarButtonOrMenuItem}
                         </MenuItemWrapper>
@@ -210,8 +242,8 @@ const renderToolbarButtonOrMenuItem = ({asMenuItem, ...otherProps}) => {
     return asMenuItem ? menuItem(otherProps) : toolbarButton(otherProps);
 };
 
-const menuItem = ({icon, label, onClick}) => (
-    <MenuItem color="inherit" onClick={onClick}>
+const menuItem = ({icon, label, onClick, ...otherProps}) => (
+    <MenuItem color="inherit" onClick={onClick} {...otherProps}>
         <ListItemIcon>{icon}</ListItemIcon>
         <ListItemText inset primary={label}/>
     </MenuItem>
@@ -221,5 +253,5 @@ Toolbar.propTypes = {
     classes: PropTypes.object.isRequired,
 };
 
-//TODO create ToolbarContent, extract data init to App
+//TODO create ToolbarContent and Button, hide tabs, extract init data to App
 export default withWidth()(withStyles(styles)(Toolbar));

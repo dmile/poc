@@ -35,12 +35,11 @@ class ToolbarHeader extends React.Component {
         const {classes, title, width, onMenuButtonClick, children} = this.props;
         const isWidthUpSm = isWidthUp('sm', width);
 
-        const primaryChildren = React.Children.toArray(children)
-            .filter(child => child.props.primary);
+        const childrenArr = React.Children.toArray(children);
+        const primaryChildren = childrenArr.filter(child => child.props.primary);
         const buttonsChildren = isWidthUpSm ? primaryChildren : [];
 
-        const otherChildren = React.Children.toArray(children)
-            .filter(child => !child.props.primary);
+        const otherChildren = childrenArr.filter(child => !child.props.primary);
         const menuChildren = isWidthUpSm ? otherChildren : primaryChildren.concat(otherChildren);
 
         return (
@@ -58,7 +57,7 @@ class ToolbarHeader extends React.Component {
                 {
                     menuChildren.length > 0 && (
                         <div>
-                            <IconButton color="inherit" onClick={this.handleMenu}>
+                            <IconButton title="More..." color="inherit" onClick={this.handleMenu}>
                                 <MoreVertIcon/>
                             </IconButton>
                             <Menu
