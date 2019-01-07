@@ -1,5 +1,5 @@
 /**
- * Group items inside categories per limited number of columns
+ * Calculate number of available columns (group category items)
  *
  * @param colsNeededArr - array of items numbers per each category
  *
