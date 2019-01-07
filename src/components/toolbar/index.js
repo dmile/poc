@@ -104,7 +104,7 @@ class Toolbar extends React.Component {
                     </MenuItemWrapper>
                 </ToolbarHeader>
                 <MuiTabs
-                    scrollable
+                    variant="scrollable"
                     scrollButtons={isWidthUpMd ? "on" : "off"}
                     value={activeTab}
                     onChange={this.handleTabChange}
