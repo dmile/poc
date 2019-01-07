@@ -131,7 +131,7 @@ const renderCategories = (categories, colsTotal, handleMenu, classes) => {
     let categoriesForMenu = [];
     const categoriesMoreThanColumns = categoriesArr.length > colsTotal;
     if (categoriesMoreThanColumns) {
-        categoriesForMenu = categoriesArr.slice(colsTotal, categoriesArr.length);
+        categoriesForMenu = categoriesArr.slice(colsTotal - 1, categoriesArr.length);
     }
 
     const colsNeededArr = categoriesArr.map(category =>

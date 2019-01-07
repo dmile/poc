@@ -166,7 +166,7 @@ class Toolbar extends React.Component {
                         </MenuItemWrapper>
                     </Category>
                     <Category label="Cloud" icon={<Filter5Icon/>}>
-                        <MenuItemWrapper label="Logo" icon={<CloudIcon/>}
+                        <MenuItemWrapper label="Default" icon={<CloudIcon/>}
                                          onClick={console.log}>
                             {renderToolbarButtonOrMenuItem}
                         </MenuItemWrapper>
