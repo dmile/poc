@@ -77,19 +77,7 @@ class Catalogue extends React.Component {
 
     render() {
         const {children, classes, width} = this.props;
-
-        let colsTotal = 0;
-        if (width === 'xl') {
-            colsTotal = 25;
-        } else if (width === 'lg') {
-            colsTotal = 18;
-        } else if (width === 'md') {
-            colsTotal = 13;
-        } else if (width === 'sm') {
-            colsTotal = 9;
-        } else {
-            colsTotal = 5;
-        }
+        const colsTotal = this.props[colsPropName(width)];
 
         return (
             <div className={classes.root}>
@@ -246,10 +234,25 @@ const renderCategoryMenu = (category, isExpanded, handleExpanded, classes) => {
     ]
 };
 
+Catalogue.defaultProps = {
+    colsXs: 5,
+    colsSm: 9,
+    colsMd: 13,
+    colsLg: 18,
+    colsXl: 25
+};
+
 Catalogue.propTypes = {
     classes: PropTypes.object.isRequired,
+    colsXs: PropTypes.number,
+    colsSm: PropTypes.number,
+    colsMd: PropTypes.number,
+    colsLg: PropTypes.number,
+    colsXl: PropTypes.number,
     width: PropTypes.oneOf(['xs', 'sm', 'md', 'lg', 'xl'])
 };
+
+const colsPropName = (width) => `cols${width.charAt(0).toUpperCase()}${width.charAt(1)}`;
 
 //TODO add props, simplify renderCategory
 export default withStyles(styles, {name: 'MuiTabs'})(Catalogue);

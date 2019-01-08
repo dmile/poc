@@ -32,7 +32,7 @@ class ToolbarHeader extends React.Component {
 
     render() {
         const {classes, title, width, onMenuButtonClick, children} = this.props;
-        const buttonsNumber = this.props[childrenPropName(width)];
+        const buttonsNumber = this.props[buttonsPropName(width)];
 
         const childrenArr = React.Children.toArray(children);
         const buttonsChildren = childrenArr.slice(0, buttonsNumber);
@@ -77,24 +77,24 @@ class ToolbarHeader extends React.Component {
     }
 }
 
-const childrenPropName = (width) => `children${width.charAt(0).toUpperCase()}${width.charAt(1)}`;
+const buttonsPropName = (width) => `buttons${width.charAt(0).toUpperCase()}${width.charAt(1)}`;
 
 ToolbarHeader.defaultProps = {
-    childrenXs: 0,
-    childrenSm: 2,
-    childrenMd: 2,
-    childrenLg: 2,
-    childrenXl: 2
+    buttonsXs: 0,
+    buttonsSm: 2,
+    buttonsMd: 2,
+    buttonsLg: 2,
+    buttonsXl: 2
 };
 
 
 ToolbarHeader.propTypes = {
     classes: PropTypes.object.isRequired,
-    childrenXs: PropTypes.number,
-    childrenSm: PropTypes.number,
-    childrenMd: PropTypes.number,
-    childrenLg: PropTypes.number,
-    childrenXl: PropTypes.number,
+    buttonsXs: PropTypes.number,
+    buttonsSm: PropTypes.number,
+    buttonsMd: PropTypes.number,
+    buttonsLg: PropTypes.number,
+    buttonsXl: PropTypes.number,
     title: PropTypes.string.isRequired,
     width: PropTypes.oneOf(['xs', 'sm', 'md', 'lg', 'xl']),
     onMenuButtonClick: PropTypes.func.isRequired,
