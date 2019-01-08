@@ -43,7 +43,6 @@ import IconButton from "@material-ui/core/IconButton/IconButton";
 import Button from "@material-ui/core/Button/Button";
 import PropTypes from 'prop-types';
 import withWidth from "@material-ui/core/withWidth";
-import {withStyles} from '@material-ui/core/styles';
 import MenuItem from "@material-ui/core/MenuItem/MenuItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText/ListItemText";
@@ -54,9 +53,6 @@ import Category from './content/catalogue/category'
 import Catalogue from './content/catalogue'
 import Item from './menu/item'
 
-
-const styles = theme => ({
-});
 
 class Toolbar extends React.Component {
     render() {
@@ -257,8 +253,11 @@ const menuItem = ({icon, label, onClick, ...otherProps}) => (
 );
 
 Toolbar.propTypes = {
-    classes: PropTypes.object.isRequired
+    children: PropTypes.oneOfType([
+        PropTypes.arrayOf(PropTypes.node),
+        PropTypes.node
+    ])
 };
 
 //TODO create Button, extract init data to App
-export default withWidth()(withStyles(styles)(Toolbar));
+export default withWidth()(Toolbar);

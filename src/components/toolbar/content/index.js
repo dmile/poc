@@ -3,9 +3,6 @@ import Tab from "@material-ui/core/Tab/Tab";
 import Tabs from "@material-ui/core/Tabs/Tabs";
 import PropTypes from 'prop-types';
 import {isWidthUp} from "@material-ui/core/withWidth";
-import {withStyles} from '@material-ui/core/styles';
-
-const styles = (theme) => ({});
 
 class ToolbarContent extends React.Component {
 
@@ -42,7 +39,9 @@ class ToolbarContent extends React.Component {
                     }
 
                 </Tabs>
-                {React.Children.toArray(children)[activeChildIdx]}
+                {
+                    React.Children.toArray(children)[activeChildIdx]
+                }
             </React.Fragment>
         );
     }
@@ -50,7 +49,6 @@ class ToolbarContent extends React.Component {
 }
 
 ToolbarContent.propTypes = {
-    classes: PropTypes.object.isRequired,
     width: PropTypes.oneOf(['xs', 'sm', 'md', 'lg', 'xl']),
     children: PropTypes.oneOfType([
         PropTypes.arrayOf(PropTypes.node),
@@ -58,4 +56,4 @@ ToolbarContent.propTypes = {
     ]).isRequired
 };
 
-export default withStyles(styles)(ToolbarContent);
+export default ToolbarContent;

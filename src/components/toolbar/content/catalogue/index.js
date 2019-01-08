@@ -249,10 +249,14 @@ Catalogue.propTypes = {
     colsMd: PropTypes.number,
     colsLg: PropTypes.number,
     colsXl: PropTypes.number,
-    width: PropTypes.oneOf(['xs', 'sm', 'md', 'lg', 'xl'])
+    width: PropTypes.oneOf(['xs', 'sm', 'md', 'lg', 'xl']),
+    children: PropTypes.oneOfType([
+        PropTypes.arrayOf(PropTypes.node),
+        PropTypes.node
+    ])
 };
 
 const colsPropName = (width) => `cols${width.charAt(0).toUpperCase()}${width.charAt(1)}`;
 
-//TODO add props, simplify renderCategory
+//TODO simplify renderCategory and menu staff
 export default withStyles(styles, {name: 'MuiTabs'})(Catalogue);
