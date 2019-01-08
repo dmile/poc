@@ -6,7 +6,6 @@ import Typography from '@material-ui/core/Typography';
 import {withStyles} from '@material-ui/core/styles';
 import MenuIcon from '@material-ui/icons/Menu';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
-import {isWidthUp} from "@material-ui/core/withWidth";
 import Menu from '@material-ui/core/Menu';
 
 const styles = (theme) => ({
@@ -33,14 +32,11 @@ class ToolbarHeader extends React.Component {
 
     render() {
         const {classes, title, width, onMenuButtonClick, children} = this.props;
-        const isWidthUpSm = isWidthUp('sm', width);
+        const buttonsNumber = this.props[childrenPropName(width)];
 
         const childrenArr = React.Children.toArray(children);
-        const primaryChildren = childrenArr.filter(child => child.props.primary);
-        const buttonsChildren = isWidthUpSm ? primaryChildren : [];
-
-        const otherChildren = childrenArr.filter(child => !child.props.primary);
-        const menuChildren = isWidthUpSm ? otherChildren : primaryChildren.concat(otherChildren);
+        const buttonsChildren = childrenArr.slice(0, buttonsNumber);
+        const menuChildren = childrenArr.slice(buttonsNumber, childrenArr.length);
 
         return (
             <Toolbar>
@@ -81,8 +77,24 @@ class ToolbarHeader extends React.Component {
     }
 }
 
+const childrenPropName = (width) => `children${width.charAt(0).toUpperCase()}${width.charAt(1)}`;
+
+ToolbarHeader.defaultProps = {
+    childrenXs: 0,
+    childrenSm: 2,
+    childrenMd: 2,
+    childrenLg: 2,
+    childrenXl: 2
+};
+
+
 ToolbarHeader.propTypes = {
     classes: PropTypes.object.isRequired,
+    childrenXs: PropTypes.number,
+    childrenSm: PropTypes.number,
+    childrenMd: PropTypes.number,
+    childrenLg: PropTypes.number,
+    childrenXl: PropTypes.number,
     title: PropTypes.string.isRequired,
     width: PropTypes.oneOf(['xs', 'sm', 'md', 'lg', 'xl']),
     onMenuButtonClick: PropTypes.func.isRequired,
@@ -92,5 +104,4 @@ ToolbarHeader.propTypes = {
     ])
 };
 
-//TODO add properties
 export default withStyles(styles)(ToolbarHeader);

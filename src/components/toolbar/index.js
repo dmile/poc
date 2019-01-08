@@ -79,7 +79,6 @@ class Toolbar extends React.Component {
             <MuiAppBar position="static">
                 <ToolbarHeader title="Page Title" onMenuButtonClick={console.log} width={width}>
                     <MenuItemWrapper
-                        primary
                         label="Search"
                         icon={<SearchIcon/>}
                         onClick={console.log}
@@ -87,7 +86,6 @@ class Toolbar extends React.Component {
                         {renderActionButtonOrMenuItem}
                     </MenuItemWrapper>
                     <MenuItemWrapper
-                        primary
                         label="Notifications"
                         icon={<NotificationsIcon/>}
                         onClick={console.log}
