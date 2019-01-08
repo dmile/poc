@@ -14,13 +14,6 @@ import FormatListNumberedRtlIcon from '@material-ui/icons/FormatListNumberedRtl'
 import FormatListBulletedIcon from '@material-ui/icons/FormatListBulleted';
 import FormatIndentDecreaseIcon from '@material-ui/icons/FormatIndentDecrease';
 import FormatIndentIncreaseIcon from '@material-ui/icons/FormatIndentIncrease';
-import Filter1Icon from '@material-ui/icons/Filter1';
-import Filter2Icon from '@material-ui/icons/Filter2';
-import Filter3Icon from '@material-ui/icons/Filter3';
-import Filter4Icon from '@material-ui/icons/Filter4';
-import Filter5Icon from '@material-ui/icons/Filter5';
-import Filter6Icon from '@material-ui/icons/Filter6';
-import Filter7Icon from '@material-ui/icons/Filter7';
 import AlternateEmailIcon from '@material-ui/icons/AlternateEmail';
 import TextRotationNoneIcon from '@material-ui/icons/TextRotationNone';
 import TextRotateVerticalIcon from '@material-ui/icons/TextRotateVertical';
@@ -40,6 +33,7 @@ import PlayArrowIcon from '@material-ui/icons/PlayArrow';
 import PauseIcon from '@material-ui/icons/Pause';
 import StopIcon from '@material-ui/icons/Stop';
 import SkipNextIcon from '@material-ui/icons/SkipNext';
+import FolderOpenIcon from '@material-ui/icons/FolderOpen';
 import MusicNote from '@material-ui/icons/MusicNote';
 import ToolbarHeader from './header'
 import Category from './catalogue/category'
@@ -127,7 +121,7 @@ class Toolbar extends React.Component {
                 </MuiTabs>
                 {activeTab === 0 &&
                 (<Catalogue width={width}>
-                    <Category label="List format" icon={<Filter1Icon/>}>
+                    <Category label="List format" icon={<FolderOpenIcon/>}>
                         <MenuItemWrapper label="List numbered" icon={<FormatListNumberedIcon/>}
                                          onClick={console.log}>
                             {renderToolbarButtonOrMenuItem}
@@ -141,7 +135,7 @@ class Toolbar extends React.Component {
                             {renderToolbarButtonOrMenuItem}
                         </MenuItemWrapper>
                     </Category>
-                    <Category label="Font" icon={<Filter2Icon/>}>
+                    <Category label="Font" icon={<FolderOpenIcon/>}>
                         <MenuItemWrapper label="Format bold" icon={<FormatBoldIcon/>}
                                          onClick={console.log}>
                             {renderToolbarButtonOrMenuItem}
@@ -155,7 +149,7 @@ class Toolbar extends React.Component {
                             {renderToolbarButtonOrMenuItem}
                         </MenuItemWrapper>
                     </Category>
-                    <Category label="Indent" icon={<Filter3Icon/>}>
+                    <Category label="Indent" icon={<FolderOpenIcon/>}>
                         <MenuItemWrapper label="Indent decrease" icon={<FormatIndentDecreaseIcon/>}
                                          onClick={console.log}>
                             {renderToolbarButtonOrMenuItem}
@@ -165,13 +159,13 @@ class Toolbar extends React.Component {
                             {renderToolbarButtonOrMenuItem}
                         </MenuItemWrapper>
                     </Category>
-                    <Category label="Emails" icon={<Filter4Icon/>}>
+                    <Category label="Emails" icon={<FolderOpenIcon/>}>
                         <MenuItemWrapper label="Just waves" icon={<AlternateEmailIcon/>}
                                          onClick={console.log}>
                             {renderToolbarButtonOrMenuItem}
                         </MenuItemWrapper>
                     </Category>
-                    <Category label="Cloud" icon={<Filter5Icon/>}>
+                    <Category label="Cloud" icon={<FolderOpenIcon/>}>
                         <MenuItemWrapper label="Default" icon={<CloudIcon/>}
                                          onClick={console.log}>
                             {renderToolbarButtonOrMenuItem}
@@ -185,7 +179,7 @@ class Toolbar extends React.Component {
                             {renderToolbarButtonOrMenuItem}
                         </MenuItemWrapper>
                     </Category>
-                    <Category label="Text alignment" icon={<Filter6Icon/>}>
+                    <Category label="Text alignment" icon={<FolderOpenIcon/>}>
                         <MenuItemWrapper label="Align left" icon={<FormatAlignLeftIcon/>}
                                          onClick={console.log}>
                             {renderToolbarButtonOrMenuItem}
@@ -203,7 +197,7 @@ class Toolbar extends React.Component {
                             {renderToolbarButtonOrMenuItem}
                         </MenuItemWrapper>
                     </Category>
-                    <Category label="Text rotation" icon={<Filter7Icon/>}>
+                    <Category label="Text rotation" icon={<FolderOpenIcon/>}>
                         <MenuItemWrapper label="Rotation none" icon={<TextRotationNoneIcon/>}
                                          onClick={console.log}>
                             {renderToolbarButtonOrMenuItem}
