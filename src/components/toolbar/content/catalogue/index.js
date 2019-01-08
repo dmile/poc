@@ -7,7 +7,7 @@ import {withStyles} from '@material-ui/core/styles';
 import PropTypes from 'prop-types';
 import Button from "@material-ui/core/Button";
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
-import group from '../../../utils/grouping'
+import group from '../../../../utils/grouping'
 import MenuItem from "@material-ui/core/MenuItem/MenuItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ExpandLess from '@material-ui/icons/ExpandLess';

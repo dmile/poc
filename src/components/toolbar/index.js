@@ -1,7 +1,5 @@
 import React from 'react';
 import MuiAppBar from '@material-ui/core/AppBar';
-import MuiTab from "@material-ui/core/Tab/Tab";
-import MuiTabs from "@material-ui/core/Tabs/Tabs";
 import SearchIcon from '@material-ui/icons/Search';
 import BarChartRoundedIcon from '@material-ui/icons/BarChartRounded';
 import SwapVerticalCircleIcon from '@material-ui/icons/SwapVerticalCircle';
@@ -41,212 +39,191 @@ import Brightness5Icon from '@material-ui/icons/Brightness5';
 import Brightness6Icon from '@material-ui/icons/Brightness6';
 import Brightness7Icon from '@material-ui/icons/Brightness7';
 import MusicNote from '@material-ui/icons/MusicNote';
-import ToolbarHeader from './header'
-import Category from './catalogue/category'
-import Catalogue from './catalogue'
-import MenuItemWrapper from './menu/item'
 import IconButton from "@material-ui/core/IconButton/IconButton";
 import Button from "@material-ui/core/Button/Button";
 import PropTypes from 'prop-types';
-import withWidth, {isWidthUp} from "@material-ui/core/withWidth";
+import withWidth from "@material-ui/core/withWidth";
 import {withStyles} from '@material-ui/core/styles';
 import MenuItem from "@material-ui/core/MenuItem/MenuItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText/ListItemText";
 
+import ToolbarHeader from './header'
+import ToolbarContent from './content'
+import Category from './content/catalogue/category'
+import Catalogue from './content/catalogue'
+import Item from './menu/item'
+
+
 const styles = theme => ({
-    leftIcon: {
-        marginRight: theme.spacing.unit,
-    }
 });
 
 class Toolbar extends React.Component {
-    state = {
-        activeTab: 0
-    };
-
-    handleTabChange = (event, value) => {
-        this.setState({activeTab: value});
-    };
-
     render() {
-        const {activeTab} = this.state;
         const {width} = this.props;
-        const isWidthUpSm = isWidthUp('sm', width);
-        const isWidthUpMd = isWidthUp('md', width);
 
         return (
             <MuiAppBar position="static">
                 <ToolbarHeader title="Page Title" onMenuButtonClick={console.log} width={width}>
-                    <MenuItemWrapper
+                    <Item
                         label="Search"
                         icon={<SearchIcon/>}
                         onClick={console.log}
                     >
                         {renderActionButtonOrMenuItem}
-                    </MenuItemWrapper>
-                    <MenuItemWrapper
+                    </Item>
+                    <Item
                         label="Notifications"
                         icon={<NotificationsIcon/>}
                         onClick={console.log}
                     >
                         {renderActionButtonOrMenuItem}
-                    </MenuItemWrapper>
-                    <MenuItemWrapper
+                    </Item>
+                    <Item
                         label="Settings"
                         icon={<SettingsIcon/>}
                         onClick={console.log}
                     >
                         {renderActionButtonOrMenuItem}
-                    </MenuItemWrapper>
-                    <MenuItemWrapper
+                    </Item>
+                    <Item
                         label="Exit"
                         icon={<ExitToAppIcon/>}
                         onClick={console.log}
                     >
                         {renderActionButtonOrMenuItem}
-                    </MenuItemWrapper>
+                    </Item>
                 </ToolbarHeader>
-                <MuiTabs
-                    variant="scrollable"
-                    scrollButtons={isWidthUpMd ? "on" : "off"}
-                    value={activeTab}
-                    onChange={this.handleTabChange}
-                >
-                    <MuiTab label="Catalogue" icon={isWidthUpSm && <BarChartRoundedIcon/>}/>
-                    <MuiTab label="Cattwo" icon={isWidthUpSm && <SwapVerticalCircleIcon/>}/>
-                    <MuiTab label="Catthree" icon={isWidthUpSm && <BarChartRoundedIcon/>}/>
-                    <MuiTab label="Catfour" icon={isWidthUpSm && <SwapVerticalCircleIcon/>}/>
-                    <MuiTab label="Catfive" icon={isWidthUpSm && <BarChartRoundedIcon/>}/>
-                    <MuiTab label="Catsix" icon={isWidthUpSm && <SwapVerticalCircleIcon/>}/>
-                    <MuiTab label="Catseven" icon={isWidthUpSm && <BarChartRoundedIcon/>}/>
-                    <MuiTab label="Cateight" icon={isWidthUpSm && <SwapVerticalCircleIcon/>}/>
-                    <MuiTab label="Catnine" icon={isWidthUpSm && <BarChartRoundedIcon/>}/>
-                </MuiTabs>
-                {activeTab === 0 &&
-                (<Catalogue width={width}>
-                    <Category label="List format" icon={<Brightness1Icon/>}>
-                        <MenuItemWrapper label="List numbered" icon={<FormatListNumberedIcon/>}
-                                         onClick={console.log}>
-                            {renderToolbarButtonOrMenuItem}
-                        </MenuItemWrapper>
-                        <MenuItemWrapper label="List bulleted" icon={<FormatListBulletedIcon/>}
-                                         onClick={console.log}>
-                            {renderToolbarButtonOrMenuItem}
-                        </MenuItemWrapper>
-                        <MenuItemWrapper label="List numbered rtl" icon={<FormatListNumberedRtlIcon/>}
-                                         onClick={console.log}>
-                            {renderToolbarButtonOrMenuItem}
-                        </MenuItemWrapper>
-                    </Category>
-                    <Category label="Font" icon={<Brightness2Icon/>}>
-                        <MenuItemWrapper label="Format bold" icon={<FormatBoldIcon/>}
-                                         onClick={console.log}>
-                            {renderToolbarButtonOrMenuItem}
-                        </MenuItemWrapper>
-                        <MenuItemWrapper label="Format italic" icon={<FormatItalicIcon/>}
-                                         onClick={console.log}>
-                            {renderToolbarButtonOrMenuItem}
-                        </MenuItemWrapper>
-                        <MenuItemWrapper label="Format underlined" icon={<FormatUnderlinedIcon/>}
-                                         onClick={console.log}>
-                            {renderToolbarButtonOrMenuItem}
-                        </MenuItemWrapper>
-                    </Category>
-                    <Category label="Indent" icon={<Brightness3Icon/>}>
-                        <MenuItemWrapper label="Indent decrease" icon={<FormatIndentDecreaseIcon/>}
-                                         onClick={console.log}>
-                            {renderToolbarButtonOrMenuItem}
-                        </MenuItemWrapper>
-                        <MenuItemWrapper label="Indent increase" icon={<FormatIndentIncreaseIcon/>}
-                                         onClick={console.log}>
-                            {renderToolbarButtonOrMenuItem}
-                        </MenuItemWrapper>
-                    </Category>
-                    <Category label="Emails" icon={<Brightness4Icon/>}>
-                        <MenuItemWrapper label="Just email" icon={<AlternateEmailIcon/>}
-                                         onClick={console.log}>
-                            {renderToolbarButtonOrMenuItem}
-                        </MenuItemWrapper>
-                    </Category>
-                    <Category label="Cloud" icon={<Brightness5Icon/>}>
-                        <MenuItemWrapper label="Default" icon={<CloudIcon/>}
-                                         onClick={console.log}>
-                            {renderToolbarButtonOrMenuItem}
-                        </MenuItemWrapper>
-                        <MenuItemWrapper label="Upload" icon={<CloudUploadIcon/>}
-                                         onClick={console.log}>
-                            {renderToolbarButtonOrMenuItem}
-                        </MenuItemWrapper>
-                        <MenuItemWrapper label="Download" icon={<CloudDownloadIcon/>}
-                                         onClick={console.log}>
-                            {renderToolbarButtonOrMenuItem}
-                        </MenuItemWrapper>
-                    </Category>
-                    <Category label="Text alignment" icon={<Brightness6Icon/>}>
-                        <MenuItemWrapper label="Align left" icon={<FormatAlignLeftIcon/>}
-                                         onClick={console.log}>
-                            {renderToolbarButtonOrMenuItem}
-                        </MenuItemWrapper>
-                        <MenuItemWrapper label="Align center" icon={<FormatAlignCenterIcon/>}
-                                         onClick={console.log}>
-                            {renderToolbarButtonOrMenuItem}
-                        </MenuItemWrapper>
-                        <MenuItemWrapper label="Align right" icon={<FormatAlignRightIcon/>}
-                                         onClick={console.log}>
-                            {renderToolbarButtonOrMenuItem}
-                        </MenuItemWrapper>
-                        <MenuItemWrapper label="Align justify" icon={<FormatAlignJustifyIcon/>}
-                                         onClick={console.log}>
-                            {renderToolbarButtonOrMenuItem}
-                        </MenuItemWrapper>
-                    </Category>
-                    <Category label="Text rotation" icon={<Brightness7Icon/>}>
-                        <MenuItemWrapper label="Rotation none" icon={<TextRotationNoneIcon/>}
-                                         onClick={console.log}>
-                            {renderToolbarButtonOrMenuItem}
-                        </MenuItemWrapper>
-                        <MenuItemWrapper label="Rotate vertical" icon={<TextRotateVerticalIcon/>}
-                                         onClick={console.log}>
-                            {renderToolbarButtonOrMenuItem}
-                        </MenuItemWrapper>
-                        <MenuItemWrapper label="Rotate up" icon={<TextRotateUpIcon/>}
-                                         onClick={console.log}>
-                            {renderToolbarButtonOrMenuItem}
-                        </MenuItemWrapper>
-                        <MenuItemWrapper label="Rotation down" icon={<TextRotationDownIcon/>}
-                                         onClick={console.log}>
-                            {renderToolbarButtonOrMenuItem}
-                        </MenuItemWrapper>
-                    </Category>
-                </Catalogue>)
-                }
-                {activeTab === 1 && (
-                    <Catalogue width={width}>
-                        <Category label="Player" icon={<MusicNote/>}>
-                            <MenuItemWrapper label="Desktop" icon={<SkipPreviousIcon/>}
-                                             onClick={console.log}>
+                <ToolbarContent width={width}>
+                    <Catalogue label="Catalogue" icon={<BarChartRoundedIcon/>} width={width}>
+                        <Category label="List format" icon={<Brightness1Icon/>}>
+                            <Item label="List numbered" icon={<FormatListNumberedIcon/>}
+                                  onClick={console.log}>
                                 {renderToolbarButtonOrMenuItem}
-                            </MenuItemWrapper>
-                            <MenuItemWrapper label="Laptop" icon={<PlayArrowIcon/>}
-                                             onClick={console.log}>
+                            </Item>
+                            <Item label="List bulleted" icon={<FormatListBulletedIcon/>}
+                                  onClick={console.log}>
                                 {renderToolbarButtonOrMenuItem}
-                            </MenuItemWrapper>
-                            <MenuItemWrapper label="Tablet" icon={<PauseIcon/>}
-                                             onClick={console.log}>
+                            </Item>
+                            <Item label="List numbered rtl" icon={<FormatListNumberedRtlIcon/>}
+                                  onClick={console.log}>
                                 {renderToolbarButtonOrMenuItem}
-                            </MenuItemWrapper>
-                            <MenuItemWrapper label="Phone" icon={<StopIcon/>}
-                                             onClick={console.log}>
-                                {renderToolbarButtonOrMenuItem}
-                            </MenuItemWrapper>
-                            <MenuItemWrapper label="Phone" icon={<SkipNextIcon/>}
-                                             onClick={console.log}>
-                                {renderToolbarButtonOrMenuItem}
-                            </MenuItemWrapper>
+                            </Item>
                         </Category>
-                    </Catalogue>)
-                }
+                        <Category label="Font" icon={<Brightness2Icon/>}>
+                            <Item label="Format bold" icon={<FormatBoldIcon/>}
+                                  onClick={console.log}>
+                                {renderToolbarButtonOrMenuItem}
+                            </Item>
+                            <Item label="Format italic" icon={<FormatItalicIcon/>}
+                                  onClick={console.log}>
+                                {renderToolbarButtonOrMenuItem}
+                            </Item>
+                            <Item label="Format underlined" icon={<FormatUnderlinedIcon/>}
+                                  onClick={console.log}>
+                                {renderToolbarButtonOrMenuItem}
+                            </Item>
+                        </Category>
+                        <Category label="Indent" icon={<Brightness3Icon/>}>
+                            <Item label="Indent decrease" icon={<FormatIndentDecreaseIcon/>}
+                                  onClick={console.log}>
+                                {renderToolbarButtonOrMenuItem}
+                            </Item>
+                            <Item label="Indent increase" icon={<FormatIndentIncreaseIcon/>}
+                                  onClick={console.log}>
+                                {renderToolbarButtonOrMenuItem}
+                            </Item>
+                        </Category>
+                        <Category label="Emails" icon={<Brightness4Icon/>}>
+                            <Item label="Just email" icon={<AlternateEmailIcon/>}
+                                  onClick={console.log}>
+                                {renderToolbarButtonOrMenuItem}
+                            </Item>
+                        </Category>
+                        <Category label="Cloud" icon={<Brightness5Icon/>}>
+                            <Item label="Default" icon={<CloudIcon/>}
+                                  onClick={console.log}>
+                                {renderToolbarButtonOrMenuItem}
+                            </Item>
+                            <Item label="Upload" icon={<CloudUploadIcon/>}
+                                  onClick={console.log}>
+                                {renderToolbarButtonOrMenuItem}
+                            </Item>
+                            <Item label="Download" icon={<CloudDownloadIcon/>}
+                                  onClick={console.log}>
+                                {renderToolbarButtonOrMenuItem}
+                            </Item>
+                        </Category>
+                        <Category label="Text alignment" icon={<Brightness6Icon/>}>
+                            <Item label="Align left" icon={<FormatAlignLeftIcon/>}
+                                  onClick={console.log}>
+                                {renderToolbarButtonOrMenuItem}
+                            </Item>
+                            <Item label="Align center" icon={<FormatAlignCenterIcon/>}
+                                  onClick={console.log}>
+                                {renderToolbarButtonOrMenuItem}
+                            </Item>
+                            <Item label="Align right" icon={<FormatAlignRightIcon/>}
+                                  onClick={console.log}>
+                                {renderToolbarButtonOrMenuItem}
+                            </Item>
+                            <Item label="Align justify" icon={<FormatAlignJustifyIcon/>}
+                                  onClick={console.log}>
+                                {renderToolbarButtonOrMenuItem}
+                            </Item>
+                        </Category>
+                        <Category label="Text rotation" icon={<Brightness7Icon/>}>
+                            <Item label="Rotation none" icon={<TextRotationNoneIcon/>}
+                                  onClick={console.log}>
+                                {renderToolbarButtonOrMenuItem}
+                            </Item>
+                            <Item label="Rotate vertical" icon={<TextRotateVerticalIcon/>}
+                                  onClick={console.log}>
+                                {renderToolbarButtonOrMenuItem}
+                            </Item>
+                            <Item label="Rotate up" icon={<TextRotateUpIcon/>}
+                                  onClick={console.log}>
+                                {renderToolbarButtonOrMenuItem}
+                            </Item>
+                            <Item label="Rotation down" icon={<TextRotationDownIcon/>}
+                                  onClick={console.log}>
+                                {renderToolbarButtonOrMenuItem}
+                            </Item>
+                        </Category>
+                    </Catalogue>
+                    <Catalogue label="Cattwo" icon={<SwapVerticalCircleIcon/>} width={width}>
+                        <Category label="Player" icon={<MusicNote/>}>
+                            <Item label="Desktop" icon={<SkipPreviousIcon/>}
+                                  onClick={console.log}>
+                                {renderToolbarButtonOrMenuItem}
+                            </Item>
+                            <Item label="Laptop" icon={<PlayArrowIcon/>}
+                                  onClick={console.log}>
+                                {renderToolbarButtonOrMenuItem}
+                            </Item>
+                            <Item label="Tablet" icon={<PauseIcon/>}
+                                  onClick={console.log}>
+                                {renderToolbarButtonOrMenuItem}
+                            </Item>
+                            <Item label="Phone" icon={<StopIcon/>}
+                                  onClick={console.log}>
+                                {renderToolbarButtonOrMenuItem}
+                            </Item>
+                            <Item label="Phone" icon={<SkipNextIcon/>}
+                                  onClick={console.log}>
+                                {renderToolbarButtonOrMenuItem}
+                            </Item>
+                        </Category>
+                    </Catalogue>
+                    <Catalogue label="Cattwo" icon={<SwapVerticalCircleIcon/>} width={width}/>
+                    <Catalogue label="Catthree" icon={<BarChartRoundedIcon/>} width={width}/>
+                    <Catalogue label="Catfour" icon={<SwapVerticalCircleIcon/>} width={width}/>
+                    <Catalogue label="Catfive" icon={<BarChartRoundedIcon/>} width={width}/>
+                    <Catalogue label="Catsix" icon={<SwapVerticalCircleIcon/>} width={width}/>
+                    <Catalogue label="Catseven" icon={<BarChartRoundedIcon/>} width={width}/>
+                    <Catalogue label="Cateight" icon={<SwapVerticalCircleIcon/>} width={width}/>
+                    <Catalogue label="Catnine" icon={<BarChartRoundedIcon/>} width={width}/>
+                </ToolbarContent>
             </MuiAppBar>
         );
     }
@@ -283,5 +260,5 @@ Toolbar.propTypes = {
     classes: PropTypes.object.isRequired
 };
 
-//TODO create ToolbarContent and Button, hide tabs, extract init data to App
+//TODO create Button, extract init data to App
 export default withWidth()(withStyles(styles)(Toolbar));
