@@ -4,6 +4,8 @@ import Tabs from "@material-ui/core/Tabs/Tabs";
 import PropTypes from 'prop-types';
 import {isWidthUp} from "@material-ui/core/withWidth";
 
+import withWidth from '../../../utils/context/width/withWidth';
+
 class ToolbarContent extends React.Component {
 
     state = {
@@ -56,4 +58,4 @@ ToolbarContent.propTypes = {
     ]).isRequired
 };
 
-export default ToolbarContent;
+export default withWidth()(ToolbarContent);

@@ -1,5 +1,4 @@
 import React from 'react';
-import Category from "./category";
 import {lighten} from "@material-ui/core/styles/colorManipulator";
 import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
 import Menu from "@material-ui/core/Menu/Menu";
@@ -7,7 +6,6 @@ import {withStyles} from '@material-ui/core/styles';
 import PropTypes from 'prop-types';
 import Button from "@material-ui/core/Button";
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
-import group from '../../../../utils/grouping'
 import MenuItem from "@material-ui/core/MenuItem/MenuItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ExpandLess from '@material-ui/icons/ExpandLess';
@@ -15,6 +13,10 @@ import ExpandMore from '@material-ui/icons/ExpandMore';
 import ListItemText from '@material-ui/core/ListItemText';
 import Collapse from '@material-ui/core/Collapse';
 import List from '@material-ui/core/List';
+
+import Category from "./category";
+import group from '../../../../utils/grouping'
+import withWidth from '../../../../utils/context/width/withWidth';
 
 const styles = (theme) => ({
     verticalDivider: {
@@ -258,5 +260,5 @@ Catalogue.propTypes = {
 
 const colsPropName = (width) => `cols${width.charAt(0).toUpperCase()}${width.charAt(1)}`;
 
-//TODO simplify renderCategory and menu staff
-export default withStyles(styles, {name: 'MuiTabs'})(Catalogue);
+//TODO simplify rendering of categories and menu
+export default withWidth()(withStyles(styles, {name: 'MuiTabs'})(Catalogue));

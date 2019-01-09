@@ -8,6 +8,8 @@ import MenuIcon from '@material-ui/icons/Menu';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
 import Menu from '@material-ui/core/Menu';
 
+import withWidth from '../../../utils/context/width/withWidth';
+
 const styles = (theme) => ({
     grow: {
         flexGrow: 1
@@ -104,4 +106,4 @@ ToolbarHeader.propTypes = {
     ])
 };
 
-export default withStyles(styles)(ToolbarHeader);
+export default withWidth()(withStyles(styles)(ToolbarHeader));

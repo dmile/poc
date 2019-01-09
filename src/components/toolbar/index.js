@@ -2,13 +2,17 @@ import React from 'react';
 import AppBar from '@material-ui/core/AppBar';
 import PropTypes from 'prop-types';
 
+import WidthProvider from "../../utils/context/width/WidthProvider";
+
 class Toolbar extends React.Component {
     render() {
-        const {width, header, content} = this.props;
+        const {header, content} = this.props;
         return (
             <AppBar position="static">
-                {header}
-                {content}
+                <WidthProvider>
+                    {header}
+                    {content}
+                </WidthProvider>
             </AppBar>
         );
     }
@@ -17,8 +21,7 @@ class Toolbar extends React.Component {
 
 Toolbar.propTypes = {
     header: PropTypes.node,
-    content: PropTypes.node,
-    width: PropTypes.oneOf(['xs', 'sm', 'md', 'lg', 'xl'])
+    content: PropTypes.node
 };
 
 export default Toolbar;

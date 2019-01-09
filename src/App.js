@@ -6,15 +6,14 @@ import Button from "@material-ui/core/Button/Button";
 import MenuItem from "@material-ui/core/MenuItem/MenuItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText/ListItemText";
-import withWidth from "@material-ui/core/withWidth";
 
 import theme from './theme'
 import Toolbar from './components/toolbar/';
-import ToolbarHeader from './components/toolbar/header'
-import ToolbarContent from './components/toolbar/content'
-import Catalogue from './components/toolbar/content/catalogue'
-import Category from './components/toolbar/content/catalogue/category'
-import ItemHoc from './components/toolbar/menu/item'
+import ToolbarHeader from './components/toolbar/header';
+import ToolbarContent from './components/toolbar/content';
+import Catalogue from './components/toolbar/content/catalogue';
+import Category from './components/toolbar/content/catalogue/category';
+import ItemHoc from './components/toolbar/menu/item';
 
 import AlternateEmailIcon from '@material-ui/icons/AlternateEmail';
 import BarChartIcon from "@material-ui/icons/BarChart";
@@ -84,8 +83,8 @@ const menuItem = ({icon, label, onClick, ...otherProps}) => (
     </MenuItem>
 );
 
-const header = (width) => (
-    <ToolbarHeader title="Page Title" onMenuButtonClick={console.log} width={width}>
+const header = (
+    <ToolbarHeader title="Page Title" onMenuButtonClick={console.log}>
         <ItemHoc label="Search" icon={<SearchIcon/>} onClick={console.log}>
             {renderActionButtonOrMenuItem}
         </ItemHoc>
@@ -101,9 +100,9 @@ const header = (width) => (
     </ToolbarHeader>
 );
 
-const content = (width) => (
-    <ToolbarContent width={width}>
-        <Catalogue label="Catalogue" icon={<BarChartIcon/>} width={width}>
+const content = (
+    <ToolbarContent>
+        <Catalogue label="Catalogue" icon={<BarChartIcon/>}>
             <Category label="List format" icon={<Brightness1Icon/>}>
                 <ItemHoc label="List numbered" icon={<FormatListNumberedIcon/>} onClick={console.log}>
                     {renderToolbarButtonOrMenuItem}
@@ -179,7 +178,7 @@ const content = (width) => (
                 </ItemHoc>
             </Category>
         </Catalogue>
-        <Catalogue label="Cattwo" icon={<SwapVerticalCircleIcon/>} width={width}>
+        <Catalogue label="Cattwo" icon={<SwapVerticalCircleIcon/>}>
             <Category label="Player" icon={<MusicNote/>}>
                 <ItemHoc label="Previous" icon={<SkipPreviousIcon/>} onClick={console.log}>
                     {renderToolbarButtonOrMenuItem}
@@ -198,27 +197,26 @@ const content = (width) => (
                 </ItemHoc>
             </Category>
         </Catalogue>
-        <Catalogue label="Cattwo" icon={<SwapVerticalCircleIcon/>} width={width}/>
-        <Catalogue label="Catthree" icon={<BarChartIcon/>} width={width}/>
-        <Catalogue label="Catfour" icon={<SwapVerticalCircleIcon/>} width={width}/>
-        <Catalogue label="Catfive" icon={<BarChartIcon/>} width={width}/>
-        <Catalogue label="Catsix" icon={<SwapVerticalCircleIcon/>} width={width}/>
-        <Catalogue label="Catseven" icon={<BarChartIcon/>} width={width}/>
-        <Catalogue label="Cateight" icon={<SwapVerticalCircleIcon/>} width={width}/>
-        <Catalogue label="Catnine" icon={<BarChartIcon/>} width={width}/>
+        <Catalogue label="Cattwo" icon={<SwapVerticalCircleIcon/>}/>
+        <Catalogue label="Catthree" icon={<BarChartIcon/>}/>
+        <Catalogue label="Catfour" icon={<SwapVerticalCircleIcon/>}/>
+        <Catalogue label="Catfive" icon={<BarChartIcon/>}/>
+        <Catalogue label="Catsix" icon={<SwapVerticalCircleIcon/>}/>
+        <Catalogue label="Catseven" icon={<BarChartIcon/>}/>
+        <Catalogue label="Cateight" icon={<SwapVerticalCircleIcon/>}/>
+        <Catalogue label="Catnine" icon={<BarChartIcon/>}/>
     </ToolbarContent>
 );
 
 
-const App = ({width}) => (
+const App = () => (
     <React.Fragment>
         <CssBaseline>
             <MuiThemeProvider theme={theme}>
-                <Toolbar header={header(width)} content={content(width)} width={width}/>
+                <Toolbar header={header} content={content}/>
             </MuiThemeProvider>
         </CssBaseline>
     </React.Fragment>
 );
 
-//TODO fix width property passing
-export default withWidth()(App);
+export default App;
