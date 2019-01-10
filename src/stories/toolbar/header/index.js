@@ -32,35 +32,31 @@ const renderActionButtonOrMenuItem = ({asMenuItem, ...otherProps}) => {
 
 storiesOf('ToolbarHeader', module)
 
+    .addDecorator(story => <WidthProvider>{story()}</WidthProvider>)
+
     .add('without buttons', () => (
-        <WidthProvider>
-            <ToolbarHeader title="Simple header"/>
-        </WidthProvider>
+        <ToolbarHeader title="Simple header"/>
     ))
 
     .add('with buttons', () => (
-        <WidthProvider>
-            <ToolbarHeader title="Header with action buttons" buttonsXs={2}>
-                <IconButton title="Search" color="inherit">
-                    <SearchIcon/>
-                </IconButton>
-                <IconButton title="Notifications" color="inherit">
-                    <NotificationsIcon/>
-                </IconButton>
-            </ToolbarHeader>
-        </WidthProvider>
+        <ToolbarHeader title="Header with action buttons" buttonsXs={2}>
+            <IconButton title="Search" color="inherit">
+                <SearchIcon/>
+            </IconButton>
+            <IconButton title="Notifications" color="inherit">
+                <NotificationsIcon/>
+            </IconButton>
+        </ToolbarHeader>
     ))
 
-    .add('with collapsed menu', () => (
-        <WidthProvider>
-            <ToolbarHeader title="Header with buttons and menu"
-                           buttonsXs={1} buttonsSm={1} buttonsMd={1} buttonsLg={1} buttonsXl={1}>
-                <ItemHoc label="Search" icon={<SearchIcon/>} onClick={console.log}>
-                    {renderActionButtonOrMenuItem}
-                </ItemHoc>
-                <ItemHoc label="Notifications" icon={<NotificationsIcon/>}>
-                    {renderActionButtonOrMenuItem}
-                </ItemHoc>
-            </ToolbarHeader>
-        </WidthProvider>
+    .add('with button and menu', () => (
+        <ToolbarHeader title="Header with actions buttons and menu"
+                       buttonsXs={1} buttonsSm={1} buttonsMd={1} buttonsLg={1} buttonsXl={1}>
+            <ItemHoc label="Search" icon={<SearchIcon/>} onClick={console.log}>
+                {renderActionButtonOrMenuItem}
+            </ItemHoc>
+            <ItemHoc label="Notifications" icon={<NotificationsIcon/>}>
+                {renderActionButtonOrMenuItem}
+            </ItemHoc>
+        </ToolbarHeader>
     ));
