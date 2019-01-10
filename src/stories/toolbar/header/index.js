@@ -31,13 +31,13 @@ const renderActionButtonOrMenuItem = ({asMenuItem, ...otherProps}) => {
     return asMenuItem ? menuItem(otherProps) : actionButton(otherProps);
 };
 
-const searchAction = () => (
+const searchAction = (
     <ItemHoc label="Search" icon={<SearchIcon/>} onClick={action('Search action fired')}>
         {renderActionButtonOrMenuItem}
     </ItemHoc>
 );
 
-const notificationAction = () => (
+const notificationAction = (
     <ItemHoc label="Notifications" icon={<NotificationsIcon/>} onClick={action('Notifications action fired')}>
         {renderActionButtonOrMenuItem}
     </ItemHoc>
