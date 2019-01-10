@@ -6,6 +6,8 @@ import NotificationsIcon from "@material-ui/icons/Notifications";
 import ListItemIcon from "@material-ui/core/ListItemIcon/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText/ListItemText";
 
+import {action} from '@storybook/addon-actions';
+
 import ToolbarHeader from "../../../components/toolbar/header";
 import WidthProvider from "../../../utils/context/width/WidthProvider";
 import ItemHoc from "../../../components/toolbar/menu/item";
@@ -29,34 +31,41 @@ const renderActionButtonOrMenuItem = ({asMenuItem, ...otherProps}) => {
     return asMenuItem ? menuItem(otherProps) : actionButton(otherProps);
 };
 
+const searchAction = () => (
+    <ItemHoc label="Search" icon={<SearchIcon/>} onClick={action('Search action fired')}>
+        {renderActionButtonOrMenuItem}
+    </ItemHoc>
+);
 
-storiesOf('ToolbarHeader', module)
+const notificationAction = () => (
+    <ItemHoc label="Notifications" icon={<NotificationsIcon/>} onClick={action('Notifications action fired')}>
+        {renderActionButtonOrMenuItem}
+    </ItemHoc>
+);
+
+
+storiesOf('Toolbar/Header', module)
 
     .addDecorator(story => <WidthProvider>{story()}</WidthProvider>)
 
     .add('without buttons', () => (
-        <ToolbarHeader title="Simple header"/>
+        <ToolbarHeader title="Simple header" onMenuButtonClick={action('Menu button clicked')}/>
     ))
 
     .add('with buttons', () => (
-        <ToolbarHeader title="Header with action buttons" buttonsXs={2}>
-            <IconButton title="Search" color="inherit">
-                <SearchIcon/>
-            </IconButton>
-            <IconButton title="Notifications" color="inherit">
-                <NotificationsIcon/>
-            </IconButton>
+        <ToolbarHeader title="Header with action buttons"
+                       buttonsXs={2}
+                       onMenuButtonClick={action('Menu button clicked')}>
+            {searchAction}
+            {notificationAction}
         </ToolbarHeader>
     ))
 
     .add('with button and menu', () => (
         <ToolbarHeader title="Header with actions buttons and menu"
-                       buttonsXs={1} buttonsSm={1} buttonsMd={1} buttonsLg={1} buttonsXl={1}>
-            <ItemHoc label="Search" icon={<SearchIcon/>} onClick={console.log}>
-                {renderActionButtonOrMenuItem}
-            </ItemHoc>
-            <ItemHoc label="Notifications" icon={<NotificationsIcon/>}>
-                {renderActionButtonOrMenuItem}
-            </ItemHoc>
+                       buttonsXs={1} buttonsSm={1} buttonsMd={1} buttonsLg={1} buttonsXl={1}
+                       onMenuButtonClick={action('Menu button clicked')}>
+            {searchAction}
+            {notificationAction}
         </ToolbarHeader>
     ));
