@@ -6,8 +6,9 @@ import Typography from '@material-ui/core/Typography';
 import {withStyles} from '@material-ui/core/styles';
 import MenuIcon from '@material-ui/icons/Menu';
 import MoreVertIcon from '@material-ui/icons/MoreVert';
-import {isWidthUp} from "@material-ui/core/withWidth";
 import Menu from '@material-ui/core/Menu';
+
+import withWidth from '../../../utils/context/width/withWidth';
 
 const styles = (theme) => ({
     grow: {
@@ -33,14 +34,11 @@ class ToolbarHeader extends React.Component {
 
     render() {
         const {classes, title, width, onMenuButtonClick, children} = this.props;
-        const isWidthUpSm = isWidthUp('sm', width);
+        const buttonsNumber = this.props[buttonsPropName(width)];
 
         const childrenArr = React.Children.toArray(children);
-        const primaryChildren = childrenArr.filter(child => child.props.primary);
-        const buttonsChildren = isWidthUpSm ? primaryChildren : [];
-
-        const otherChildren = childrenArr.filter(child => !child.props.primary);
-        const menuChildren = isWidthUpSm ? otherChildren : primaryChildren.concat(otherChildren);
+        const buttonsChildren = childrenArr.slice(0, buttonsNumber);
+        const menuChildren = childrenArr.slice(buttonsNumber, childrenArr.length);
 
         return (
             <Toolbar>
@@ -81,8 +79,24 @@ class ToolbarHeader extends React.Component {
     }
 }
 
+const buttonsPropName = (width) => `buttons${width.charAt(0).toUpperCase()}${width.charAt(1)}`;
+
+ToolbarHeader.defaultProps = {
+    buttonsXs: 0,
+    buttonsSm: 2,
+    buttonsMd: 2,
+    buttonsLg: 2,
+    buttonsXl: 2
+};
+
+
 ToolbarHeader.propTypes = {
     classes: PropTypes.object.isRequired,
+    buttonsXs: PropTypes.number,
+    buttonsSm: PropTypes.number,
+    buttonsMd: PropTypes.number,
+    buttonsLg: PropTypes.number,
+    buttonsXl: PropTypes.number,
     title: PropTypes.string.isRequired,
     width: PropTypes.oneOf(['xs', 'sm', 'md', 'lg', 'xl']),
     onMenuButtonClick: PropTypes.func.isRequired,
@@ -92,5 +106,4 @@ ToolbarHeader.propTypes = {
     ])
 };
 
-//TODO add properties
-export default withStyles(styles)(ToolbarHeader);
+export default withWidth()(withStyles(styles)(ToolbarHeader));

@@ -1,5 +1,4 @@
 import React from 'react';
-import Category from "./category";
 import {lighten} from "@material-ui/core/styles/colorManipulator";
 import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
 import Menu from "@material-ui/core/Menu/Menu";
@@ -7,7 +6,6 @@ import {withStyles} from '@material-ui/core/styles';
 import PropTypes from 'prop-types';
 import Button from "@material-ui/core/Button";
 import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
-import group from '../../../utils/grouping'
 import MenuItem from "@material-ui/core/MenuItem/MenuItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ExpandLess from '@material-ui/icons/ExpandLess';
@@ -15,6 +13,10 @@ import ExpandMore from '@material-ui/icons/ExpandMore';
 import ListItemText from '@material-ui/core/ListItemText';
 import Collapse from '@material-ui/core/Collapse';
 import List from '@material-ui/core/List';
+
+import Category from "./category";
+import group from '../../../../utils/grouping'
+import withWidth from '../../../../utils/context/width/withWidth';
 
 const styles = (theme) => ({
     verticalDivider: {
@@ -77,19 +79,7 @@ class Catalogue extends React.Component {
 
     render() {
         const {children, classes, width} = this.props;
-
-        let colsTotal = 0;
-        if (width === 'xl') {
-            colsTotal = 25;
-        } else if (width === 'lg') {
-            colsTotal = 18;
-        } else if (width === 'md') {
-            colsTotal = 13;
-        } else if (width === 'sm') {
-            colsTotal = 9;
-        } else {
-            colsTotal = 5;
-        }
+        const colsTotal = this.props[colsPropName(width)];
 
         return (
             <div className={classes.root}>
@@ -246,10 +236,29 @@ const renderCategoryMenu = (category, isExpanded, handleExpanded, classes) => {
     ]
 };
 
-Catalogue.propTypes = {
-    classes: PropTypes.object.isRequired,
-    width: PropTypes.oneOf(['xs', 'sm', 'md', 'lg', 'xl'])
+Catalogue.defaultProps = {
+    colsXs: 5,
+    colsSm: 9,
+    colsMd: 13,
+    colsLg: 18,
+    colsXl: 25
 };
 
-//TODO add props, simplify renderCategory
-export default withStyles(styles, {name: 'MuiTabs'})(Catalogue);
+Catalogue.propTypes = {
+    classes: PropTypes.object.isRequired,
+    colsXs: PropTypes.number,
+    colsSm: PropTypes.number,
+    colsMd: PropTypes.number,
+    colsLg: PropTypes.number,
+    colsXl: PropTypes.number,
+    width: PropTypes.oneOf(['xs', 'sm', 'md', 'lg', 'xl']),
+    children: PropTypes.oneOfType([
+        PropTypes.arrayOf(PropTypes.node),
+        PropTypes.node
+    ])
+};
+
+const colsPropName = (width) => `cols${width.charAt(0).toUpperCase()}${width.charAt(1)}`;
+
+//TODO simplify rendering of categories and menu
+export default withWidth()(withStyles(styles, {name: 'MuiTabs'})(Catalogue));
