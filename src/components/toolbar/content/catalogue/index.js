@@ -79,13 +79,38 @@ class Catalogue extends React.Component {
 
     render() {
         const {children, classes, width} = this.props;
+        const categories = React.Children.toArray(children);
+
+        const colsNeededArr = categories.map(category =>
+            React.Children.count(category.props.children));
         const colsTotal = this.props[colsPropName(width)];
+        const colsAvailableArr = group(colsNeededArr, colsTotal);
+
+        let categoriesEllipsis = null;
+        const categoriesMoreThanColumns = categories.length > colsTotal;
+        if (categoriesMoreThanColumns) {
+            colsAvailableArr[colsTotal - 1] = 0; // free last col for ellipsis
+            categoriesEllipsis = renderCategoriesEllipsis(categories, colsTotal, this.handleMenu);
+        }
 
         return (
             <div className={classes.root}>
                 {
-                    renderCategories(children, colsTotal, this.handleMenu, classes)
+                    categories.map((category, idx) => {
+                        const colsAvailable = colsAvailableArr[idx];
+                        const isCategoryVisible = colsAvailable > 0;
+                        const isCategoryLast = idx === categories.length - 1;
+                        return (isCategoryVisible && (
+                            <React.Fragment key={`${category.key}_f`}>
+                                {renderCategory(category, colsAvailable, this.handleMenu)}
+                                {!isCategoryLast && (
+                                    <div className={classes.verticalDivider}/>
+                                )}
+                            </React.Fragment>
+                        ));
+                    })
                 }
+                {categoriesEllipsis}
                 {this.state.menu && (
                     <Menu
                         anchorEl={this.state.menu.anchorEl}
@@ -113,96 +138,54 @@ class Catalogue extends React.Component {
     }
 }
 
-const renderCategories = (categories, colsTotal, handleMenu, classes) => {
-    const categoriesArr = React.Children.toArray(categories);
-
-    let categoriesForMenu = [];
-    const categoriesMoreThanColumns = categoriesArr.length > colsTotal;
-    if (categoriesMoreThanColumns) {
-        categoriesForMenu = categoriesArr.slice(colsTotal - 1, categoriesArr.length);
+const renderCategory = (category, colsAvailable, handleMenu) => {
+    const childrenCount = React.Children.count(category.props.children);
+    if (colsAvailable === childrenCount) {
+        return category;
+    } else if (colsAvailable === 1) {
+        return renderCategoryAsButton(category, handleMenu);
+    } else {
+        return renderCategoryWithEllipsis(category, colsAvailable, handleMenu);
     }
-
-    const colsNeededArr = categoriesArr.map(category =>
-        React.Children.count(category.props.children));
-    const colsAvailableArr = group(colsNeededArr, colsTotal);
-    if (categoriesMoreThanColumns) {
-        colsAvailableArr[colsTotal - 1] = 0; // free last col for ellipsis
-    }
-
-    return <React.Fragment>
-        {
-            categoriesArr.map((category, idx) => {
-                const colsAvailable = colsAvailableArr[idx];
-                const isCategoryVisible = colsAvailable > 0;
-                const isCategoryLast = idx === categoriesArr.length - 1;
-                return (isCategoryVisible && (
-                    <React.Fragment key={`${category.key}_f`}>
-                        {renderCategory(category, colsAvailable, handleMenu)}
-                        {!isCategoryLast && (
-                            <div className={classes.verticalDivider}/>
-                        )}
-                    </React.Fragment>
-                ))
-            })
-        }
-        {categoriesMoreThanColumns && (
-            <Category>
-                <EllipsisButton onClick={e => {
-                    const menu = {
-                        anchorEl: e.currentTarget,
-                        items: [],
-                        categories: categoriesForMenu
-                    };
-                    handleMenu(menu);
-                }}/>
-            </Category>)
-        }
-    </React.Fragment>
-
 };
 
-const renderCategory = (category, colsAvailable, handleMenu) => {
+const renderCategoryAsButton = (category, handleMenu) => {
     const {label, icon, children} = category.props;
     const items = React.Children.toArray(children);
-    if (colsAvailable === items.length) {
-        return (
-            <Category>
-                {items}
-            </Category>
-        )
-    } else if (colsAvailable === 1) {
-        return (
-            <Category key={category.key}>
-                <Button title={label} color="inherit" onClick={(e) => {
-                    const menu = {
-                        anchorEl: e.currentTarget,
-                        items,
-                        categories: []
-                    };
-                    handleMenu(menu)
-                }}>
-                    {icon}
-                    <ArrowDropDownIcon fontSize="small"/>
-                </Button>
-            </Category>
-        )
-    } else {
-        const visibleItems = items.slice(0, colsAvailable - 1); // one column per ellipsis
-        const menuItems = items.slice(colsAvailable - 1, items.length);
-        return (
-            <Category>
-                {visibleItems}
-                <EllipsisButton onClick={e => {
-                    const menu = {
-                        anchorEl: e.currentTarget,
-                        items: menuItems,
-                        categories: []
-                    };
-                    handleMenu(menu);
-                }}/>
-            </Category>
-        )
-    }
+    return (
+        <Category key={category.key}>
+            <Button title={label} color="inherit" onClick={(e) => {
+                const menu = {
+                    anchorEl: e.currentTarget,
+                    items,
+                    categories: []
+                };
+                handleMenu(menu)
+            }}>
+                {icon}
+                <ArrowDropDownIcon fontSize="small"/>
+            </Button>
+        </Category>
+    )
+};
+
+const renderCategoryWithEllipsis = (category, colsAvailable, handleMenu) => {
+    const items = React.Children.toArray(category.props.children);
+    const visibleItems = items.slice(0, colsAvailable - 1); // one column per ellipsis
+    const menuItems = items.slice(colsAvailable - 1, items.length);
+    return (
+        <Category>
+            {visibleItems}
+            <EllipsisButton onClick={e => {
+                const menu = {
+                    anchorEl: e.currentTarget,
+                    items: menuItems,
+                    categories: []
+                };
+                handleMenu(menu);
+            }}/>
+        </Category>
+    )
 };
 
 const EllipsisButton = ({onClick}) => (
@@ -234,6 +217,22 @@ const renderCategoryMenu = (category, isExpanded, handleExpanded, classes) => {
             </List>
         </Collapse>
     ]
+};
+
+const renderCategoriesEllipsis = (categories, colsTotal, handleMenu) => {
+    const categoriesForMenu = categories.slice(colsTotal - 1, categories.length);
+    return (
+        <Category>
+            <EllipsisButton onClick={e => {
+                const menu = {
+                    anchorEl: e.currentTarget,
+                    items: [],
+                    categories: categoriesForMenu
+                };
+                handleMenu(menu);
+            }}/>
+        </Category>
+    )
 };
 
 Catalogue.defaultProps = {
